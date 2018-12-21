@@ -1,0 +1,43 @@
+# Generate the following six parameters with:
+# ./psono/manage.py fileserver fsgenerateserverkeys CLUSTER_ID
+
+SECRET_KEY: 'SOME SUPER SECRET KEY THAT SHOULD BE RANDOM AND 32 OR MORE DIGITS LONG'
+PRIVATE_KEY: '302650c3c82f7111c2e8ceb660d32173cdc8c3d7717f1d4f982aad5234648fcb'
+PUBLIC_KEY: '02da2ad857321d701d754a7e60d0a147cdbc400ff4465e1f57bc2d9fbfeddf0b'
+CLUSTER: 'CLUSTER_ID'
+SHARDS: []
+
+
+# Switch DEBUG to false if you go into production
+DEBUG: True
+
+# Adjust this according to Django Documentation https://docs.djangoproject.com/en/2.0/ref/settings/#allowed-hosts
+ALLOWED_HOSTS: ['*']
+
+# Should be the URL of the host under which the server is reachable
+# If you open the url you should have a text similar to {"detail":"Authentication credentials were not provided."}
+HOST_URL: 'https://example.com'
+
+# Should be the URL of the host under which the fileserver is reachable
+# If you open the url you should have a text similar to {"detail":"Authentication credentials were not provided."}
+FILESERVER_URL: 'https://example.com'
+
+
+# Cache enabled without belows Redis may lead to unexpected behaviour
+CACHE_ENABLE: False
+
+# Cache with Redis
+# By deault you should use something different than database 0 or 1, e.g. 13 (default max is 16, can be configured in
+# redis.conf) possible URLS are:
+#    redis://[:password]@localhost:6379/0
+#    rediss://[:password]@localhost:6379/0
+#    unix://[:password]@/path/to/socket.sock?db=0
+CACHE_REDIS: False
+CACHE_REDIS_LOCATION: 'redis://127.0.0.1:6379/13'
+
+# Disables Throttling (necessary for unittests to pass) by overriding the cache with a dummy cache
+# https://docs.djangoproject.com/en/2.0/topics/cache/#dummy-caching-for-development
+THROTTLING: False
+
+# Disables protections (necessary for unittests to pass)
+REPLAY_PROTECTION_DISABLED: True

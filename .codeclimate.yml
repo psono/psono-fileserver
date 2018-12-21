@@ -1,0 +1,41 @@
+---
+engines:
+  csslint:
+    enabled: true
+    checks:
+      box-sizing:
+        enabled: false
+  duplication:
+    enabled: false
+    checks:
+      Identical code:
+        enabled: false
+    config:
+      languages:
+        python:
+          mass_threshold: 190
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+    checks:
+      TODO:
+        enabled: false
+  radon:
+    enabled: true
+ratings:
+  paths:
+  - "**.css"
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
+  - "**.php"
+  - "**.py"
+  - "**.rb"
+exclude_paths:
+- configs/**/*
+- var/**/*
+- psono/restapi/tests/**/*
+- psono/restapi/migrations/**/*
+- psono/static/**/*

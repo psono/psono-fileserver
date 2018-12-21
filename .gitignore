@@ -1,0 +1,11 @@
+.idea
+.mypy_cache
+*.py[cod]
+problemtest
+.coverage*
+log
+docs/
+htmlcov/
+test/
+psono/static/admin
+psono/static/rest_framework
