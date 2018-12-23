@@ -167,35 +167,35 @@ REST_FRAMEWORK = {
     },
 }
 
-LOGGING = {
-    # 'version': 1,
-    # 'disable_existing_loggers': False,
-    # 'formatters': {
-    #     'restapi_query_formatter': {
-    #         '()': 'restapi.log.QueryFormatter',
-    #         'format': '%(time_utc)s logger=%(name)s, %(message)s'
-    #     }
-    # },
-    # 'filters': {
-    #     'restapi_query_console': {
-    #         '()': 'restapi.log.FilterQueryConsole',
-    #     },
-    # },
-    # 'handlers': {
-    #     'restapi_query_handler_console': {
-    #         'level': 'DEBUG',
-    #         'class': 'logging.StreamHandler',
-    #         'formatter': 'restapi_query_formatter',
-    #         'filters': ['restapi_query_console'],
-    #     },
-    # },
-    # 'loggers': {
-    #     'django.db.backends': {
-    #         'level': 'DEBUG',
-    #         'handlers': ['restapi_query_handler_console'],
-    #     }
-    # }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'restapi_query_formatter': {
+#             '()': 'restapi.log.QueryFormatter',
+#             'format': '%(time_utc)s logger=%(name)s, %(message)s'
+#         }
+#     },
+#     'filters': {
+#         'restapi_query_console': {
+#             '()': 'restapi.log.FilterQueryConsole',
+#         },
+#     },
+#     'handlers': {
+#         'restapi_query_handler_console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'restapi_query_formatter',
+#             'filters': ['restapi_query_console'],
+#         },
+#     },
+#     'loggers': {
+#         'django.db.backends': {
+#             'level': 'DEBUG',
+#             'handlers': ['restapi_query_handler_console'],
+#         }
+#     }
+# }
 
 
 for key, value in config_get('DEFAULT_THROTTLE_RATES', {}).items():

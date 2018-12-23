@@ -11,8 +11,6 @@ class APIServer(object):
     @staticmethod
     def _decrypt(r):
 
-        r.json_decrypted = None
-
         try:
             json_encrypted = json.loads(r.text)
 
@@ -22,7 +20,7 @@ class APIServer(object):
             decrypted_text = settings.SESSION_CRYPTO_BOX.decrypt(text, nonce)
             r.json_decrypted = json.loads(decrypted_text.decode())
         except:
-            pass
+            r.json_decrypted = None
 
 
 
