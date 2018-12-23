@@ -24,10 +24,6 @@ RUN mkdir -p /root/.pip && \
     pip3.6 install typing && \
     mkdir -p /root/.psono_fileserver && \
     cp /root/configs/mainconfig/settings.yaml /root/.psono_fileserver/settings.yaml && \
-    sed -i s/YourPostgresDatabase/postgres/g /root/.psono_fileserver/settings.yaml && \
-    sed -i s/YourPostgresUser/postgres/g /root/.psono_fileserver/settings.yaml && \
-    sed -i s/YourPostgresHost/postgres/g /root/.psono_fileserver/settings.yaml && \
-    sed -i s/YourPostgresPort/5432/g /root/.psono_fileserver/settings.yaml && \
     sed -i s,path/to/psono-fileserver,root,g /root/.psono_fileserver/settings.yaml && \
     yum remove -y \
         python36u-pip && \
