@@ -2,8 +2,10 @@
 # ./psono/manage.py fileserver fsgenerateserverkeys CLUSTER_ID
 
 SECRET_KEY: 'SOME SUPER SECRET KEY THAT SHOULD BE RANDOM AND 32 OR MORE DIGITS LONG'
-PRIVATE_KEY: '302650c3c82f7111c2e8ceb660d32173cdc8c3d7717f1d4f982aad5234648fcb'
-PUBLIC_KEY: '02da2ad857321d701d754a7e60d0a147cdbc400ff4465e1f57bc2d9fbfeddf0b'
+PRIVATE_KEY: '5f02021c4c0e83c99b007ccb595172c3a9bc204568c12c0b53a820968430d3cc'
+PUBLIC_KEY: '76bea610db1dc6d4cae3f90fbb98383e3c9dfc01a0a0dd59cadf3dc3a3c5e00a'
+SERVER_URL: 'https://example.com/server'
+SERVER_PUBLIC_KEY: '02da2ad857321d701d754a7e60d0a147cdbc400ff4465e1f57bc2d9fbfeddf0b'
 CLUSTER_ID: 'aae7f116-506d-4e17-bf53-f62868a218d6'
 CLUSTER_PRIVATE_KEY: 'b571a54c5c2b80b3bd31ae7934f7457b719f7ea11f1782b41ed84d1a7d6656f8'
 SHARDS: []
@@ -17,11 +19,7 @@ ALLOWED_HOSTS: ['*']
 
 # Should be the URL of the host under which the server is reachable
 # If you open the url you should have a text similar to {"detail":"Authentication credentials were not provided."}
-HOST_URL: 'https://example.com'
-
-# Should be the URL of the host under which the fileserver is reachable
-# If you open the url you should have a text similar to {"detail":"Authentication credentials were not provided."}
-FILESERVER_URL: 'https://example.com'
+HOST_URL: 'https://example.com/fileserver01'
 
 
 # Cache enabled without belows Redis may lead to unexpected behaviour
