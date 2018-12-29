@@ -3,6 +3,7 @@ import requests
 import json
 import nacl.encoding
 import nacl.secret
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
 class APIServer(object):
@@ -38,6 +39,9 @@ class APIServer(object):
                     'cluster_id': settings.CLUSTER_ID
                 })
             }
+
+        if not settings.SERVER_URL_VERIFY_SSL:
+            requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
         r = requests.put(settings.SERVER_URL + endpoint, data=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
 
