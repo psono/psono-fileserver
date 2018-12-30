@@ -25,7 +25,8 @@ class PingView(GenericAPIView):
         """
 
         r = APIServer.query(
-            endpoint="/fileserver/alive/"
+            method="PUT",
+            endpoint="/alive/"
         )
 
         if status.is_success(r.status_code):

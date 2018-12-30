@@ -26,7 +26,7 @@ class APIServer(object):
 
 
     @staticmethod
-    def query(endpoint, data=None, headers=None):
+    def query(method, endpoint, data=None, headers=None):
 
         if not data:
             data = {}
@@ -43,7 +43,10 @@ class APIServer(object):
         if not settings.SERVER_URL_VERIFY_SSL:
             requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-        r = requests.put(settings.SERVER_URL + endpoint, data=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
+        if method == 'PUT':
+            r = requests.put(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
+        else:
+            raise Exception
 
         APIServer._decrypt(r)
 

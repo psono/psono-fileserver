@@ -1,6 +1,4 @@
-from django.conf import settings
 from django.core.files.base import ContentFile
-from django.core.files.storage import get_storage_class
 
 from rest_framework import status
 from rest_framework.response import Response
@@ -33,14 +31,14 @@ class UploadView(GenericAPIView):
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST
             )
 
-        file = serializer.validated_data['file']
+        chunk = serializer.validated_data['chunk']
         storage = serializer.validated_data['storage']
         hash_blake2b = serializer.validated_data['hash_blake2b']
 
         target_path = os.path.join(hash_blake2b[0:2], hash_blake2b[2:4], hash_blake2b)
 
         if not storage.exists(target_path):
-            storage.save(target_path, ContentFile(file.read()))
+            storage.save(target_path, ContentFile(chunk.read()))
 
         return Response({}, status=status.HTTP_200_OK)
 
