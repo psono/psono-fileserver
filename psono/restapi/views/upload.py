@@ -35,7 +35,7 @@ class UploadView(GenericAPIView):
         storage = serializer.validated_data['storage']
         hash_blake2b = serializer.validated_data['hash_blake2b']
 
-        target_path = os.path.join(hash_blake2b[0:2], hash_blake2b[2:4], hash_blake2b)
+        target_path = os.path.join(hash_blake2b[0:2], hash_blake2b[2:4], hash_blake2b[4:6], hash_blake2b[6:8], hash_blake2b)
 
         if not storage.exists(target_path):
             storage.save(target_path, ContentFile(chunk.read()))
