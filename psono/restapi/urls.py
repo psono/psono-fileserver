@@ -25,6 +25,7 @@ urlpatterns = [
 
     url(r'^healthcheck/$', views.HealthCheckView.as_view(), name='healthcheck'),
     url(r'^upload/$', views.UploadView.as_view(), name='upload'),
+    url(r'^download/$', views.DownloadView.as_view(), name='download'),
     url(r'^info/$', views.InfoView.as_view(), name='info'),
 
 ]
