@@ -67,6 +67,7 @@ ALLOWED_HOSTS = config_get('ALLOWED_HOSTS')
 
 READ = config_get('READ', True)
 WRITE = config_get('WRITE', True)
+DELETE = config_get('DELETE', True)
 IP_READ_WHITELIST = config_get('IP_READ_WHITELIST', [])
 IP_WRITE_WHITELIST = config_get('IP_WRITE_WHITELIST', [])
 IP_READ_BLACKLIST = config_get('IP_READ_BLACKLIST', [])
@@ -83,7 +84,8 @@ for s in config_get('SHARDS'):
     SHARDS_PUBLIC.append({
         'shard_id': s['shard_id'],
         'read': s['read'] and READ,
-        'write': s['write'] and WRITE
+        'write': s['write'] and WRITE,
+        'delete': s['delete'] and DELETE
     })
 
 HOST_URL = config_get('HOST_URL')

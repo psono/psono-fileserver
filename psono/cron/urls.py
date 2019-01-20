@@ -21,4 +21,5 @@ from . import views
 
 urlpatterns = [
     url(r'^ping/$', views.PingView.as_view(), name='ping'),
+    url(r'^cleanup/chunks/$', views.CleanupChunksView.as_view(), name='cleanup_chunks'),
 ]

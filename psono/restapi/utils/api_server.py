@@ -32,22 +32,58 @@ class APIServer(object):
             data = {}
 
         if not headers:
-            headers = {
-                'Authorization': 'Token ' + settings.FILESERVER_ID,
-                'Authorization-Validator': json.dumps({
-                    'fileserver_info': settings.FILESERVER_INFO,
-                    'cluster_id': settings.CLUSTER_ID
-                })
-            }
+            headers = {}
 
         if not settings.SERVER_URL_VERIFY_SSL:
             requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
         if method == 'PUT':
             r = requests.put(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
+        elif method == 'GET':
+            r = requests.get(settings.SERVER_URL + '/fileserver' + endpoint, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
         else:
             raise Exception
 
         APIServer._decrypt(r)
 
         return r
+
+
+    @staticmethod
+    def alive():
+
+        method = 'PUT'
+        endpoint = '/alive/'
+        data = None
+        headers = {
+            'Authorization': 'Token ' + settings.FILESERVER_ID,
+            'Authorization-Validator': json.dumps({
+                'fileserver_info': settings.FILESERVER_INFO,
+                'cluster_id': settings.CLUSTER_ID
+            })
+        }
+
+        return APIServer.query(
+            method=method,
+            endpoint=endpoint,
+            data=data,
+            headers=headers,
+        )
+
+
+    @staticmethod
+    def cleanup_chunks():
+
+        method = 'GET'
+        endpoint = '/cleanup/chunks/'
+        data = None
+        headers = {
+            'Authorization': 'Token ' + settings.FILESERVER_ID,
+        }
+
+        return APIServer.query(
+            method=method,
+            endpoint=endpoint,
+            data=data,
+            headers=headers,
+        )

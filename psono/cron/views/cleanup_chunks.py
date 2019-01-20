@@ -5,14 +5,14 @@ from rest_framework.generics import GenericAPIView
 from ..permission_classes import AllowLocalhost
 from restapi.utils import APIServer
 
-class PingView(GenericAPIView):
+class CleanupChunksView(GenericAPIView):
     permission_classes = (AllowLocalhost,)
     allowed_methods = ('GET', 'OPTIONS', 'HEAD')
     throttle_scope = 'cron'
 
     def get(self, request, *args, **kwargs):
         """
-        Sends the health status of the file server to the server.
+        Request chunks from the server that can be deleted
 
         :param request:
         :type request:
@@ -24,12 +24,14 @@ class PingView(GenericAPIView):
         :rtype:
         """
 
-        r = APIServer.alive()
+        r = APIServer.cleanup_chunks()
 
-        if status.is_success(r.status_code):
-            return Response(status=status.HTTP_200_OK)
-        else:
+        if not status.is_success(r.status_code):
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        print(r.json_decrypted)
+
+        return Response(status=status.HTTP_200_OK)
 
 
 
