@@ -37,7 +37,9 @@ class APIServer(object):
         if not settings.SERVER_URL_VERIFY_SSL:
             requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
-        if method == 'PUT':
+        if method == 'POST':
+            r = requests.post(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
+        elif method == 'PUT':
             r = requests.put(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
         elif method == 'GET':
             r = requests.get(settings.SERVER_URL + '/fileserver' + endpoint, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
@@ -77,6 +79,57 @@ class APIServer(object):
         method = 'GET'
         endpoint = '/cleanup/chunks/'
         data = None
+        headers = {
+            'Authorization': 'Token ' + settings.FILESERVER_ID,
+        }
+
+        return APIServer.query(
+            method=method,
+            endpoint=endpoint,
+            data=data,
+            headers=headers,
+        )
+
+
+    @staticmethod
+    def cleanup_chunks_confirm(data):
+
+        method = 'POST'
+        endpoint = '/cleanup/chunks/'
+        headers = {
+            'Authorization': 'Token ' + settings.FILESERVER_ID,
+        }
+
+        return APIServer.query(
+            method=method,
+            endpoint=endpoint,
+            data=data,
+            headers=headers,
+        )
+
+
+    @staticmethod
+    def authorize_upload(data):
+
+        method = 'PUT'
+        endpoint = '/authorize/upload/'
+        headers = {
+            'Authorization': 'Token ' + settings.FILESERVER_ID,
+        }
+
+        return APIServer.query(
+            method=method,
+            endpoint=endpoint,
+            data=data,
+            headers=headers,
+        )
+
+
+    @staticmethod
+    def authorize_download(data):
+
+        method = 'PUT'
+        endpoint = '/authorize/download/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
         }

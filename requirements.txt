@@ -14,7 +14,10 @@ django-redis
 ntplib
 python-dateutil
 django-storages
-dropbox
-azure
-apache-libcloud
+django-storages[google]
+django-storages[azure]
+django-storages[dropbox]
+django-storages[libcloud]
+django-storages[boto3]
+django-storages[sftp]
 pyblake2

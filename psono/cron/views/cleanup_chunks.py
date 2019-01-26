@@ -1,6 +1,10 @@
+from django.conf import settings
+from django.core.files.storage import get_storage_class
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
+
+import os
 
 from ..permission_classes import AllowLocalhost
 from restapi.utils import APIServer
@@ -29,7 +33,50 @@ class CleanupChunksView(GenericAPIView):
         if not status.is_success(r.status_code):
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        print(r.json_decrypted)
+
+        deleted_chunk_list = []
+        for shard_id in r.json_decrypted['shards']:
+
+            if shard_id not in settings.SHARDS_DICT:
+                continue
+
+            shard_config = settings.SHARDS_DICT[shard_id]
+
+            if not shard_config['delete']:
+                continue
+
+            chunks = r.json_decrypted['shards'][shard_id]
+
+            if len(chunks) < 1:
+                continue
+
+            deleted_chunks= []
+
+            storage = get_storage_class(settings.AVAILABLE_FILESYSTEMS[shard_config['engine']['class']])(
+                **shard_config['engine']['kwargs'])
+
+            for hash_blake2b in chunks:
+
+                target_path = os.path.join(hash_blake2b[0:2], hash_blake2b[2:4], hash_blake2b[4:6], hash_blake2b[6:8], hash_blake2b)
+
+                if storage.exists(target_path):
+                    storage.delete(target_path)
+
+                deleted_chunks.append(hash_blake2b)
+
+            deleted_chunk_list.append({
+                'shard_id': shard_id,
+                'chunks': deleted_chunks,
+            })
+
+
+        if len(deleted_chunk_list) > 0:
+            r = APIServer.cleanup_chunks_confirm({
+                'deleted_chunks': deleted_chunk_list
+            })
+
+            if not status.is_success(r.status_code):
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return Response(status=status.HTTP_200_OK)
 

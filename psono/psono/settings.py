@@ -26,6 +26,7 @@ import nacl.utils
 import nacl.secret
 from nacl.public import PrivateKey, PublicKey, Box
 from django.conf import global_settings
+from google.oauth2 import service_account
 
 HOME = os.path.expanduser('~')
 
@@ -81,6 +82,11 @@ SHARDS_DICT = {}
 
 for s in config_get('SHARDS'):
     SHARDS_DICT[s['shard_id']] = s
+    if SHARDS_DICT[s['shard_id']]['engine']['class'] == 'google_cloud' and 'credentials' in SHARDS_DICT[s['shard_id']]['engine']['kwargs']:
+        SHARDS_DICT[s['shard_id']]['engine']['kwargs']['credentials'] = service_account.Credentials.from_service_account_file(
+            SHARDS_DICT[s['shard_id']]['engine']['kwargs']['credentials']
+        )
+
     SHARDS_PUBLIC.append({
         'shard_id': s['shard_id'],
         'read': s['read'] and READ,
@@ -103,6 +109,7 @@ FILE_UPLOAD_TEMP_DIR = config_get('FILE_UPLOAD_TEMP_DIR', global_settings.FILE_U
 AVAILABLE_FILESYSTEMS = {
     'local': 'django.core.files.storage.FileSystemStorage',
     'amazon_s3': 'storages.backends.s3boto3.S3Boto3Storage',
+    'digital_ocean': 'storages.backends.s3boto3.S3Boto3Storage',
     'azure': 'storages.backends.azure_storage.AzureStorage',
     'dropbox': 'storages.backends.dropbox.DropBoxStorage',
     'google_cloud': 'storages.backends.gcloud.GoogleCloudStorage',
@@ -321,6 +328,7 @@ def generate_fileserver_info():
         'SHARDS_PUBLIC': SHARDS_PUBLIC,
         'READ': READ,
         'WRITE': WRITE,
+        'DELETE': DELETE,
         'IP_READ_WHITELIST': IP_READ_WHITELIST,
         'IP_WRITE_WHITELIST': IP_WRITE_WHITELIST,
         'IP_READ_BLACKLIST': IP_READ_BLACKLIST,
@@ -343,6 +351,7 @@ def generate_signature():
         'shards': SHARDS_PUBLIC,
         'read': READ,
         'write': WRITE,
+        'delete': DELETE,
         'host_url': HOST_URL,
     }
 

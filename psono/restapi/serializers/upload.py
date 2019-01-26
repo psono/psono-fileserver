@@ -40,18 +40,15 @@ class UploadSerializer(serializers.Serializer):
         chunk_size = len(chunk_content)
         hash_blake2b = pyblake2.blake2b(chunk_content).hexdigest()
 
-        r = APIServer.query(
-            method="PUT",
-            endpoint="/authorize/upload/",
-            data= {
-                'token': token,
-                'ticket': ticket,
-                'ticket_nonce': ticket_nonce,
-                'chunk_size': chunk_size,
-                'hash_blake2b': hash_blake2b,
-                'ip_address': get_ip(self.context['request']),
-            },
-        )
+
+        r = APIServer.authorize_upload({
+            'token': token,
+            'ticket': ticket,
+            'ticket_nonce': ticket_nonce,
+            'chunk_size': chunk_size,
+            'hash_blake2b': hash_blake2b,
+            'ip_address': get_ip(self.context['request']),
+        })
 
         if status.is_server_error(r.status_code):
             msg = _("Server is offline.")

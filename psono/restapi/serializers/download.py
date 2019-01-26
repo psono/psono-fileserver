@@ -20,16 +20,12 @@ class DownloadSerializer(serializers.Serializer):
         ticket = attrs.get('ticket')
         ticket_nonce = attrs.get('ticket_nonce')
 
-        r = APIServer.query(
-            method="PUT",
-            endpoint="/authorize/download/",
-            data= {
-                'token': token,
-                'ticket': ticket,
-                'ticket_nonce': ticket_nonce,
-                'ip_address': get_ip(self.context['request']),
-            },
-        )
+        r = APIServer.authorize_download({
+            'token': token,
+            'ticket': ticket,
+            'ticket_nonce': ticket_nonce,
+            'ip_address': get_ip(self.context['request']),
+        })
 
         if status.is_server_error(r.status_code):
             msg = _("Server is offline.")
