@@ -50,25 +50,20 @@ class CleanupChunksView(GenericAPIView):
             if len(chunks) < 1:
                 continue
 
-            deleted_chunks= []
-
             storage = get_storage_class(settings.AVAILABLE_FILESYSTEMS[shard_config['engine']['class']])(
                 **shard_config['engine']['kwargs'])
 
-            for hash_blake2b in chunks:
+            for hash_checksum in chunks:
 
-                target_path = os.path.join(hash_blake2b[0:2], hash_blake2b[2:4], hash_blake2b[4:6], hash_blake2b[6:8], hash_blake2b)
+                target_path = os.path.join(hash_checksum[0:2], hash_checksum[2:4], hash_checksum[4:6], hash_checksum[6:8], hash_checksum)
 
                 if storage.exists(target_path):
                     storage.delete(target_path)
 
-                deleted_chunks.append(hash_blake2b)
-
             deleted_chunk_list.append({
                 'shard_id': shard_id,
-                'chunks': deleted_chunks,
+                'chunks': chunks,
             })
-
 
         if len(deleted_chunk_list) > 0:
             r = APIServer.cleanup_chunks_confirm({

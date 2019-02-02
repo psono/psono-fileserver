@@ -29,10 +29,10 @@ class DownloadView(GenericAPIView):
             )
 
         chunk = serializer.validated_data['chunk']
-        hash_blake2b = serializer.validated_data['hash_blake2b']
+        hash_checksum = serializer.validated_data['hash_checksum']
 
         response = HttpResponse(FileWrapper(chunk), content_type='application/octet-stream')
-        response['Content-Disposition'] = 'attachment; filename="%s"' % hash_blake2b
+        response['Content-Disposition'] = 'attachment; filename="%s"' % hash_checksum
 
         return response
 

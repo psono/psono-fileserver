@@ -4,9 +4,9 @@ from django.conf import settings
 from django.core.files.storage import get_storage_class
 from rest_framework import serializers, exceptions
 
-from ..utils import get_ip, APIServer
+import hashlib
 
-import pyblake2
+from ..utils import get_ip, APIServer
 
 
 class UploadSerializer(serializers.Serializer):
@@ -38,7 +38,7 @@ class UploadSerializer(serializers.Serializer):
         chunk.seek(0)
 
         chunk_size = len(chunk_content)
-        hash_blake2b = pyblake2.blake2b(chunk_content).hexdigest()
+        hash_checksum = hashlib.sha512(chunk_content).hexdigest()
 
 
         r = APIServer.authorize_upload({
@@ -46,7 +46,7 @@ class UploadSerializer(serializers.Serializer):
             'ticket': ticket,
             'ticket_nonce': ticket_nonce,
             'chunk_size': chunk_size,
-            'hash_blake2b': hash_blake2b,
+            'hash_checksum': hash_checksum,
             'ip_address': get_ip(self.context['request']),
         })
 
@@ -74,6 +74,6 @@ class UploadSerializer(serializers.Serializer):
 
         attrs['storage'] = storage
         attrs['chunk'] = chunk
-        attrs['hash_blake2b'] = hash_blake2b
+        attrs['hash_checksum'] = hash_checksum
 
         return attrs

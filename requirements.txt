@@ -20,4 +20,3 @@ django-storages[dropbox]
 django-storages[libcloud]
 django-storages[boto3]
 django-storages[sftp]
-pyblake2

@@ -36,13 +36,13 @@ class DownloadSerializer(serializers.Serializer):
             raise exceptions.ValidationError(msg)
 
         shard_id = r.json_decrypted.get('shard_id', None)
-        hash_blake2b = r.json_decrypted.get('hash_blake2b', None)
+        hash_checksum = r.json_decrypted.get('hash_checksum', None)
 
         if shard_id is None:
             msg = _("Shard ID is missing.")
             raise exceptions.ValidationError(msg)
 
-        if hash_blake2b is None:
+        if hash_checksum is None:
             msg = _("Blake2b hash is missing.")
             raise exceptions.ValidationError(msg)
 
@@ -54,12 +54,12 @@ class DownloadSerializer(serializers.Serializer):
 
         storage = get_storage_class(settings.AVAILABLE_FILESYSTEMS[shard_config['engine']['class']])(**shard_config['engine']['kwargs'])
 
-        target_path = os.path.join(hash_blake2b[0:2], hash_blake2b[2:4], hash_blake2b[4:6], hash_blake2b[6:8], hash_blake2b)
+        target_path = os.path.join(hash_checksum[0:2], hash_checksum[2:4], hash_checksum[4:6], hash_checksum[6:8], hash_checksum)
         if not storage.exists(target_path):
             msg = _("CHUNK_NOT_AVAILABLE")
             raise exceptions.ValidationError(msg)
 
         attrs['chunk'] = storage.open(target_path)
-        attrs['hash_blake2b'] = hash_blake2b
+        attrs['hash_checksum'] = hash_checksum
 
         return attrs
