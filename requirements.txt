@@ -13,6 +13,15 @@ pynacl
 django-redis
 ntplib
 python-dateutil
+
+google-cloud-storage
+azure
+azure-storage-blob
+dropbox
+apache-libcloud
+boto3
+paramiko
+
 django-storages
 django-storages[google]
 django-storages[azure]
