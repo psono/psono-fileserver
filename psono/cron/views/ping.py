@@ -28,8 +28,10 @@ class PingView(GenericAPIView):
 
         if status.is_success(r.status_code):
             return Response(status=status.HTTP_200_OK)
+        elif r.status_code == 401:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
         else:
-            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 

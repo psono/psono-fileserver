@@ -77,7 +77,7 @@ class APIServer(object):
     def cleanup_chunks():
 
         method = 'GET'
-        endpoint = '/cleanup/chunks/'
+        endpoint = '/chunks/cleanup/'
         data = None
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
@@ -95,7 +95,7 @@ class APIServer(object):
     def cleanup_chunks_confirm(data):
 
         method = 'POST'
-        endpoint = '/cleanup/chunks/'
+        endpoint = '/chunks/cleanup/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
         }
@@ -112,7 +112,7 @@ class APIServer(object):
     def authorize_upload(data):
 
         method = 'PUT'
-        endpoint = '/authorize/upload/'
+        endpoint = '/upload/authorize/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
         }
@@ -129,7 +129,24 @@ class APIServer(object):
     def authorize_download(data):
 
         method = 'PUT'
-        endpoint = '/authorize/download/'
+        endpoint = '/download/authorize/'
+        headers = {
+            'Authorization': 'Token ' + settings.FILESERVER_ID,
+        }
+
+        return APIServer.query(
+            method=method,
+            endpoint=endpoint,
+            data=data,
+            headers=headers,
+        )
+
+
+    @staticmethod
+    def revoke_download(data):
+
+        method = 'PUT'
+        endpoint = '/download/revoke/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
         }
