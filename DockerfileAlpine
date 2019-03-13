@@ -19,7 +19,7 @@ RUN apk upgrade --no-cache && \
     pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \
     pip3 install uwsgi && \
-    mkdir -p /root/.psono_fileserver /var/log/cron && \
+    mkdir -p /root/.psono_fileserver /var/log/cron /opt/psono-shard && \
     echo "*/5     *       *       *       *       ( touch /tmp/psono_fileserver_cleanup && curl -f http://localhost/cron/cleanup/chunks/ && touch /tmp/psono_fileserver_cleanup_success )" >> /etc/crontabs/root && \
     echo "*       *       *       *       *       ( sleep 5; touch /tmp/psono_fileserver_ping && curl -f http://localhost/cron/ping/ && touch /tmp/psono_fileserver_ping_success )" >> /etc/crontabs/root && \
     echo "*       *       *       *       *       ( sleep 15; touch /tmp/psono_fileserver_ping && curl -f http://localhost/cron/ping/ && touch /tmp/psono_fileserver_ping_success )" >> /etc/crontabs/root && \
