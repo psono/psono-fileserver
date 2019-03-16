@@ -14,14 +14,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import yaml
 import json
-import nacl.encoding
-import nacl.signing
 import binascii
 import six
 import uuid
 from corsheaders.defaults import default_headers
 
 import nacl.encoding
+import nacl.signing
 import nacl.utils
 import nacl.secret
 from nacl.public import PrivateKey, PublicKey, Box
@@ -321,6 +320,7 @@ def generate_fileserver_info():
 
     nonce = nacl.utils.random(nacl.secret.SecretBox.NONCE_SIZE)
     encrypted = cluster_crypto_box.encrypt(json.dumps({
+        'VERSION': VERSION,
         'CLUSTER_ID': CLUSTER_ID,
         'FILESERVER_ID': FILESERVER_ID,
         'FILESERVER_PUBLIC_KEY': PUBLIC_KEY,
