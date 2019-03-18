@@ -324,7 +324,7 @@ def generate_fileserver_info():
     nonce = nacl.utils.random(nacl.secret.SecretBox.NONCE_SIZE)
     encrypted = cluster_crypto_box.encrypt(json.dumps({
         'VERSION': VERSION,
-        'hostname': HOSTNAME,
+        'HOSTNAME': HOSTNAME,
         'CLUSTER_ID': CLUSTER_ID,
         'FILESERVER_ID': FILESERVER_ID,
         'FILESERVER_PUBLIC_KEY': PUBLIC_KEY,
