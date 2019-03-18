@@ -348,7 +348,6 @@ def generate_signature():
 
     info = {
         'version': VERSION,
-        'hostname': HOSTNAME,
         'fileserver_id': FILESERVER_ID,
         'api': 1,
         'public_key': PUBLIC_KEY,
