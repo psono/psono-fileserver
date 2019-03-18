@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import socket
 import os
 import yaml
 import json
@@ -312,6 +313,8 @@ STATIC_URL = '/static/'
 with open(os.path.join(BASE_DIR, 'VERSION.txt')) as f:
     VERSION = f.readline().rstrip()
 
+HOSTNAME = socket.getfqdn()
+
 SESSION_CRYPTO_BOX = nacl.secret.SecretBox(FILESERVER_SESSION_KEY, encoder=nacl.encoding.HexEncoder)
 
 def generate_fileserver_info():
@@ -321,6 +324,7 @@ def generate_fileserver_info():
     nonce = nacl.utils.random(nacl.secret.SecretBox.NONCE_SIZE)
     encrypted = cluster_crypto_box.encrypt(json.dumps({
         'VERSION': VERSION,
+        'hostname': HOSTNAME,
         'CLUSTER_ID': CLUSTER_ID,
         'FILESERVER_ID': FILESERVER_ID,
         'FILESERVER_PUBLIC_KEY': PUBLIC_KEY,
@@ -344,6 +348,7 @@ def generate_signature():
 
     info = {
         'version': VERSION,
+        'hostname': HOSTNAME,
         'fileserver_id': FILESERVER_ID,
         'api': 1,
         'public_key': PUBLIC_KEY,
