@@ -16,6 +16,7 @@ import os
 import yaml
 import json
 import binascii
+import hashlib
 import six
 import uuid
 from corsheaders.defaults import default_headers
@@ -32,7 +33,6 @@ HOME = os.path.expanduser('~')
 
 with open(os.path.join(HOME, '.psono_fileserver', 'settings.yaml'), 'r') as stream:
     config = yaml.safe_load(stream)
-
 
 def config_get(key, *args):
     if 'PSONOFS_' + key in os.environ:
@@ -256,7 +256,7 @@ WSGI_APPLICATION = 'psono.wsgi.application'
 DATABASES = {
   'default': {
     'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': ':memory:',
+    'NAME': 'sqlite.db',
   }
 }
 
@@ -303,6 +303,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+try:
+    with open(os.path.join(BASE_DIR, '..', 'PSONOFS_CRON_ACCESS_KEY')) as f:
+        CRON_ACCESS_KEY = f.readline().rstrip()
+except:
+    CRON_ACCESS_KEY = config_get('CRON_ACCESS_KEY', hashlib.sha256(SECRET_KEY.encode()).hexdigest())
 
 
 # Static files (CSS, JavaScript, Images)
