@@ -3,14 +3,16 @@ from django.core.files.storage import get_storage_class
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
+from rest_framework.permissions import AllowAny
 
 import os
 
-from ..permission_classes import AllowLocalhost
+from ..authentication import CronAuthentication
 from restapi.utils import APIServer
 
 class CleanupChunksView(GenericAPIView):
-    permission_classes = (AllowLocalhost,)
+    authentication_classes = (CronAuthentication, )
+    permission_classes = (AllowAny,)
     allowed_methods = ('GET', 'OPTIONS', 'HEAD')
     throttle_scope = 'cron'
 
