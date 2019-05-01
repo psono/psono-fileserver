@@ -54,8 +54,17 @@ class UploadSerializer(serializers.Serializer):
             msg = _("Server is offline.")
             raise exceptions.ValidationError(msg)
 
+        if not r.json_decrypted:
+            msg = _("Server returned un-decryptable response.")
+            raise exceptions.ValidationError(msg)
+
+        non_field_errors = r.json_decrypted.get('non_field_errors', None)
+        if non_field_errors:
+            msg = _('; '.join(non_field_errors))
+            raise exceptions.ValidationError(msg)
+
         if not status.is_success(r.status_code):
-            msg = _("Server is offline.")
+            msg = _("Unknown error reported by server.")
             raise exceptions.ValidationError(msg)
 
         shard_id = r.json_decrypted.get('shard_id', None)
