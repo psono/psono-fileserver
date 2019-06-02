@@ -13,13 +13,13 @@ class UploadSerializer(serializers.Serializer):
 
     def validate(self, attrs: dict) -> dict:
 
-        token = self.context['request'].data.get('token', None)
+        file_transfer_id = self.context['request'].data.get('file_transfer_id', None)
         chunk = self.context['request'].data.get('chunk', None)
         ticket = self.context['request'].data.get('ticket', None)
         ticket_nonce = self.context['request'].data.get('ticket_nonce', None)
 
-        if token is None:
-            msg = _("Token is required.")
+        if file_transfer_id is None:
+            msg = _("File transfer id is required.")
             raise exceptions.ValidationError(msg)
 
         if chunk is None:
@@ -42,7 +42,7 @@ class UploadSerializer(serializers.Serializer):
 
 
         r = APIServer.authorize_upload({
-            'token': token,
+            'file_transfer_id': file_transfer_id,
             'ticket': ticket,
             'ticket_nonce': ticket_nonce,
             'chunk_size': chunk_size,

@@ -5,23 +5,24 @@ from django.core.files.storage import get_storage_class
 from rest_framework import serializers, exceptions
 
 from ..utils import get_ip, APIServer
+from ..fields import UUIDField
 
 import os
 
 
 class DownloadSerializer(serializers.Serializer):
-    token = serializers.CharField(required=True, max_length=128)
+    file_transfer_id = UUIDField(required=True)
     ticket = serializers.CharField(required=True)
     ticket_nonce = serializers.CharField(required=True, max_length=64)
 
     def validate(self, attrs: dict) -> dict:
 
-        token = attrs.get('token')
+        file_transfer_id = attrs.get('file_transfer_id')
         ticket = attrs.get('ticket')
         ticket_nonce = attrs.get('ticket_nonce')
 
         r = APIServer.authorize_download({
-            'token': token,
+            'file_transfer_id': str(file_transfer_id),
             'ticket': ticket,
             'ticket_nonce': ticket_nonce,
             'ip_address': get_ip(self.context['request']),
@@ -67,7 +68,7 @@ class DownloadSerializer(serializers.Serializer):
         if not storage.exists(target_path):
 
             APIServer.revoke_download({
-                'token': token,
+                'file_transfer_id': file_transfer_id,
                 'ticket': ticket,
                 'ticket_nonce': ticket_nonce,
                 'ip_address': get_ip(self.context['request']),
