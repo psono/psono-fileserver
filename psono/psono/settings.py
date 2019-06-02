@@ -69,6 +69,7 @@ ALLOWED_HOSTS = config_get('ALLOWED_HOSTS')
 READ = config_get('READ', True)
 WRITE = config_get('WRITE', True)
 DELETE = config_get('DELETE', True)
+ALLOW_LINK_SHARES = config_get('ALLOW_LINK_SHARES', True)
 IP_READ_WHITELIST = config_get('IP_READ_WHITELIST', [])
 IP_WRITE_WHITELIST = config_get('IP_WRITE_WHITELIST', [])
 IP_READ_BLACKLIST = config_get('IP_READ_BLACKLIST', [])
@@ -91,7 +92,8 @@ for s in config_get('SHARDS'):
         'shard_id': s['shard_id'],
         'read': s['read'] and READ,
         'write': s['write'] and WRITE,
-        'delete': s['delete'] and DELETE
+        'delete': s['delete'] and DELETE,
+        'allow_link_shares': s.get('allow_link_shares', 'True') and ALLOW_LINK_SHARES
     })
 
 HOST_URL = config_get('HOST_URL')
@@ -339,6 +341,7 @@ def generate_fileserver_info():
         'READ': READ,
         'WRITE': WRITE,
         'DELETE': DELETE,
+        'ALLOW_LINK_SHARES': ALLOW_LINK_SHARES,
         'IP_READ_WHITELIST': IP_READ_WHITELIST,
         'IP_WRITE_WHITELIST': IP_WRITE_WHITELIST,
         'IP_READ_BLACKLIST': IP_READ_BLACKLIST,
@@ -362,6 +365,7 @@ def generate_signature():
         'read': READ,
         'write': WRITE,
         'delete': DELETE,
+        'allow_link_shares': ALLOW_LINK_SHARES,
         'host_url': HOST_URL,
     }
 
