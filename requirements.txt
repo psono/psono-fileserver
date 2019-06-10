@@ -106,7 +106,7 @@ django-filter==2.1.0
 django-redis==4.10.0
 django-rest-auth==0.9.3
 django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.7.1
-django==2.1.7
+django==2.2.2
 djangorestframework==3.9.1
 docutils==0.14            # via botocore
 dropbox==9.3.0
@@ -142,4 +142,5 @@ requests==2.21.0          # via adal, apache-libcloud, azure-cosmosdb-table, azu
 rsa==4.0                  # via google-auth
 s3transfer==0.1.13        # via boto3
 six==1.12.0
+sqlparse==0.3.0           # via django
 urllib3==1.24.1           # via botocore, requests
