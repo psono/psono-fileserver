@@ -6,7 +6,7 @@ def get_os_username():
     os_username = 'unknown'
     try:
         os_username = os.getlogin()
-    except:
+    except: #nosec
         pass
 
     if os_username:
