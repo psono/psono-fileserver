@@ -2,9 +2,6 @@ from django.conf import settings
 from django.core.files.storage import get_storage_class
 from django.core.files.base import ContentFile
 from rest_framework import status
-import ldap
-from ldap import filter
-import ldapurl
 import socket
 import bcrypt
 import uuid
@@ -176,7 +173,7 @@ def test_config():
 
         if shard.get('shard_id').lower() in shards:
             return {
-                'error': '  - Error: Duplicate of a domain found (' + shard.get('LDAP_DOMAIN').lower() + '). Domains should be unique.'
+                'error': '  - Error: Duplicate of a shard id found (' + shard.get('shard_id').lower() + '). Shard IDs should be unique.'
             }
 
         shards.append(shard.get('shard_id').lower())
