@@ -1,4 +1,18 @@
+import os
 
+
+def get_os_username():
+
+    os_username = 'unknown'
+    try:
+        os_username = os.getlogin()
+    except: #nosec
+        pass
+
+    if os_username:
+        return os_username
+    else:
+        return 'unknown'
 
 def get_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR', None)

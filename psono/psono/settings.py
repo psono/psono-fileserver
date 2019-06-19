@@ -77,11 +77,12 @@ IP_WRITE_BLACKLIST = config_get('IP_WRITE_BLACKLIST', [])
 
 CLUSTER_ID = config_get('CLUSTER_ID')
 CLUSTER_PRIVATE_KEY = config_get('CLUSTER_PRIVATE_KEY')
+SHARDS = config_get('SHARDS')
 
 SHARDS_PUBLIC = []
 SHARDS_DICT = {}
 
-for s in config_get('SHARDS'):
+for s in SHARDS:
     SHARDS_DICT[s['shard_id']] = s
     if SHARDS_DICT[s['shard_id']]['engine']['class'] == 'google_cloud' and 'credentials' in SHARDS_DICT[s['shard_id']]['engine']['kwargs']:
         SHARDS_DICT[s['shard_id']]['engine']['kwargs']['credentials'] = service_account.Credentials.from_service_account_file(
