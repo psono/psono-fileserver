@@ -276,12 +276,12 @@ def test_config():
     r = APIServer.alive()
     if r.status_code == 401:
             return {
-                'error': '  - Error: Connection to server was refused by the server with a permission denied (Status ' + r.status_code + ') and the following message:' + r.data
+                'error': '  - Error: Connection to server was refused by the server with a permission denied (Status {response.status_code}) and the following message: {response.text}'.format(response=r)
             }
 
     if not status.is_success(r.status_code):
             return {
-                'error': '  - Error: Connection to server was refused by the server with a Status ' + r.status_code + ' and the following message:' + r.data
+                'error': '  - Error: Connection to server was refused by the server with a Status {response.status_code} and the following message: {response.text}'.format(response=r)
             }
 
     print('  - Success: Connection to server and authorization successful.')
