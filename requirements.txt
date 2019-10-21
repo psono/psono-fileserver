@@ -143,4 +143,4 @@ rsa==4.0                  # via google-auth
 s3transfer==0.1.13        # via boto3
 six==1.12.0
 sqlparse==0.3.0           # via django
-urllib3==1.24.1           # via botocore, requests
+urllib3==1.24.2           # via botocore, requests
