@@ -1,6 +1,6 @@
 six
 cffi
-django==2.2.6
+django==2.2.8
 djangorestframework
 django-rest-auth
 django-allauth
