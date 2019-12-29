@@ -17,7 +17,6 @@ import yaml
 import json
 import binascii
 import hashlib
-import six
 import uuid
 from corsheaders.defaults import default_headers
 
@@ -375,7 +374,7 @@ def generate_signature():
     signing_box = nacl.signing.SigningKey(PRIVATE_KEY, encoder=nacl.encoding.HexEncoder)
     verify_key = signing_box.verify_key.encode(encoder=nacl.encoding.HexEncoder)
     # The first 128 chars (512 bits or 64 bytes) are the actual signature, the rest the binary encoded info
-    signature = binascii.hexlify(signing_box.sign(six.b(info)))[:128]
+    signature = binascii.hexlify(signing_box.sign(info.encode()))[:128]
 
     return {
         'info': info,

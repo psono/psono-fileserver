@@ -7,7 +7,6 @@ import bcrypt
 import uuid
 from os import access, R_OK
 from os.path import isfile
-import six
 import os
 from urllib.parse  import urlparse
 from restapi.utils import APIServer

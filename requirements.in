@@ -1,4 +1,3 @@
-six==1.12.0
 cffi==1.11.5
 django==2.2.8
 djangorestframework==3.9.1
