@@ -108,6 +108,9 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = config_get('FILE_UPLOAD_MAX_MEMORY_SIZE', global_s
 DATA_UPLOAD_MAX_MEMORY_SIZE = config_get('DATA_UPLOAD_MAX_MEMORY_SIZE', global_settings.DATA_UPLOAD_MAX_MEMORY_SIZE)
 FILE_UPLOAD_TEMP_DIR = config_get('FILE_UPLOAD_TEMP_DIR', global_settings.FILE_UPLOAD_TEMP_DIR)
 
+from storages.backends.apache_libcloud import LibCloudStorage
+from django.core.files.storage import FileSystemStorage
+
 AVAILABLE_FILESYSTEMS = {
     'local': 'django.core.files.storage.FileSystemStorage',
     'amazon_s3': 'storages.backends.s3boto3.S3Boto3Storage',

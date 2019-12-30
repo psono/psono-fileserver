@@ -1,15 +1,10 @@
 from django.conf import settings
-from django.core.files.storage import get_storage_class
 from django.core.files.base import ContentFile
 from rest_framework import status
 import socket
-import bcrypt
-import uuid
-from os import access, R_OK
-from os.path import isfile
 import os
 from urllib.parse  import urlparse
-from restapi.utils import APIServer
+from restapi.utils import APIServer, get_storage
 from restapi.utils import get_os_username
 
 def is_socket_open(host, port, timeout=5.0):
@@ -241,8 +236,7 @@ def test_config():
 
             print('  - Success: Required property location in your engine\'s kwargs present.')
 
-        storage = get_storage_class(settings.AVAILABLE_FILESYSTEMS[shard['engine']['class']])(
-            **shard['engine']['kwargs'])
+        storage = get_storage(shard['engine'])
 
         target_path = os.path.join('testconfig', 'test.txt')
 
