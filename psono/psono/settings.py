@@ -17,7 +17,6 @@ import yaml
 import json
 import binascii
 import hashlib
-import six
 import uuid
 from corsheaders.defaults import default_headers
 
@@ -108,6 +107,9 @@ FILESERVER_SESSION_KEY = nacl.encoding.HexEncoder.encode(nacl.utils.random(nacl.
 FILE_UPLOAD_MAX_MEMORY_SIZE = config_get('FILE_UPLOAD_MAX_MEMORY_SIZE', global_settings.FILE_UPLOAD_MAX_MEMORY_SIZE)
 DATA_UPLOAD_MAX_MEMORY_SIZE = config_get('DATA_UPLOAD_MAX_MEMORY_SIZE', global_settings.DATA_UPLOAD_MAX_MEMORY_SIZE)
 FILE_UPLOAD_TEMP_DIR = config_get('FILE_UPLOAD_TEMP_DIR', global_settings.FILE_UPLOAD_TEMP_DIR)
+
+from storages.backends.apache_libcloud import LibCloudStorage
+from django.core.files.storage import FileSystemStorage
 
 AVAILABLE_FILESYSTEMS = {
     'local': 'django.core.files.storage.FileSystemStorage',
@@ -375,7 +377,7 @@ def generate_signature():
     signing_box = nacl.signing.SigningKey(PRIVATE_KEY, encoder=nacl.encoding.HexEncoder)
     verify_key = signing_box.verify_key.encode(encoder=nacl.encoding.HexEncoder)
     # The first 128 chars (512 bits or 64 bytes) are the actual signature, the rest the binary encoded info
-    signature = binascii.hexlify(signing_box.sign(six.b(info)))[:128]
+    signature = binascii.hexlify(signing_box.sign(info.encode()))[:128]
 
     return {
         'info': info,

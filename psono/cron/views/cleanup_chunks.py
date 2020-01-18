@@ -8,7 +8,7 @@ from rest_framework.permissions import AllowAny
 import os
 
 from ..authentication import CronAuthentication
-from restapi.utils import APIServer
+from restapi.utils import APIServer, get_storage
 
 class CleanupChunksView(GenericAPIView):
     authentication_classes = (CronAuthentication, )
@@ -52,8 +52,7 @@ class CleanupChunksView(GenericAPIView):
             if len(chunks) < 1:
                 continue
 
-            storage = get_storage_class(settings.AVAILABLE_FILESYSTEMS[shard_config['engine']['class']])(
-                **shard_config['engine']['kwargs'])
+            storage = get_storage(shard_config['engine'])
 
             for hash_checksum in chunks:
 

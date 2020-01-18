@@ -106,7 +106,7 @@ django-filter==2.1.0
 django-redis==4.10.0
 django-rest-auth==0.9.3
 django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.7.1
-django==2.2.6
+django==2.2.9
 djangorestframework==3.9.1
 docutils==0.14            # via botocore
 dropbox==9.3.0
@@ -141,6 +141,6 @@ requests-oauthlib==1.2.0  # via django-allauth, msrest
 requests==2.21.0          # via adal, apache-libcloud, azure-cosmosdb-table, azure-datalake-store, azure-keyvault, azure-servicebus, azure-servicemanagement-legacy, azure-storage-common, django-allauth, dropbox, google-api-core, msrest, requests-oauthlib
 rsa==4.0                  # via google-auth
 s3transfer==0.1.13        # via boto3
-six==1.12.0
+six==1.12.0               # via bcrypt, cryptography, django-rest-auth, dropbox, google-api-core, google-auth, google-resumable-media, isodate, more-itertools, protobuf, pynacl, python-dateutil
 sqlparse==0.3.0           # via django
 urllib3==1.24.3           # via botocore, requests

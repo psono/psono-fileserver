@@ -1,12 +1,11 @@
 from rest_framework import status
 from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.core.files.storage import get_storage_class
 from rest_framework import serializers, exceptions
 
 import hashlib
 
-from ..utils import get_ip, APIServer
+from ..utils import get_ip, APIServer, get_storage
 
 
 class UploadSerializer(serializers.Serializer):
@@ -79,7 +78,7 @@ class UploadSerializer(serializers.Serializer):
 
         shard_config = settings.SHARDS_DICT[shard_id]
 
-        storage = get_storage_class(settings.AVAILABLE_FILESYSTEMS[shard_config['engine']['class']])(**shard_config['engine']['kwargs'])
+        storage = get_storage(shard_config['engine'])
 
         attrs['storage'] = storage
         attrs['chunk'] = chunk

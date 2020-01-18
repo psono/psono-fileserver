@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.files.storage import get_storage_class
 from rest_framework import serializers, exceptions
 
-from ..utils import get_ip, APIServer
+from ..utils import get_ip, APIServer, get_storage
 from ..fields import UUIDField
 
 import os
@@ -62,7 +62,7 @@ class DownloadSerializer(serializers.Serializer):
 
         shard_config = settings.SHARDS_DICT[shard_id]
 
-        storage = get_storage_class(settings.AVAILABLE_FILESYSTEMS[shard_config['engine']['class']])(**shard_config['engine']['kwargs'])
+        storage = get_storage(shard_config['engine'])
 
         target_path = os.path.join(hash_checksum[0:2], hash_checksum[2:4], hash_checksum[4:6], hash_checksum[6:8], hash_checksum)
         if not storage.exists(target_path):

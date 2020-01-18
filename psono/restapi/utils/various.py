@@ -1,5 +1,9 @@
 import os
+from django.conf import settings
+from django.core.files.storage import get_storage_class
 
+def get_storage(engine):
+    return get_storage_class(settings.AVAILABLE_FILESYSTEMS[engine['class']])(**engine['kwargs'])
 
 def get_os_username():
 
