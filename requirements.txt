@@ -106,7 +106,7 @@ django-filter==2.1.0
 django-redis==4.10.0
 django-rest-auth==0.9.3
 django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.7.1
-django==2.2.9
+django==2.2.10
 djangorestframework==3.9.1
 docutils==0.14            # via botocore
 dropbox==9.3.0
