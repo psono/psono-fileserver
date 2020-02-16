@@ -1,5 +1,5 @@
 cffi==1.11.5
-django==2.2.9
+django==2.2.10
 djangorestframework==3.9.1
 django-rest-auth==0.9.3
 django-allauth==0.38.0
