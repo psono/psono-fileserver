@@ -10,7 +10,7 @@ RUN apk upgrade --no-cache && \
     echo '[global]' >> /root/.pip/pip.conf && \
     echo 'index-url = https://psono.jfrog.io/psono/api/pypi/pypi/simple' >> /root/.pip/pip.conf && \
     apk add --no-cache \
-        certificates \
+        ca-certificates \
         dcron \
         curl \
         build-base \
