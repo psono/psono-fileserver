@@ -100,8 +100,8 @@ chardet==3.0.4            # via requests
 cryptography==2.9         # via adal, azure-cosmosdb-table, azure-keyvault, azure-storage-common, paramiko
 defusedxml==0.6.0         # via python3-openid
 django-allauth==0.41.0
-django-cors-headers==2.4.0
-django-filter==2.1.0
+django-cors-headers==3.2.0
+django-filter==2.2.0
 django-redis==4.10.0
 django-rest-auth==0.9.5
 django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.7.1
