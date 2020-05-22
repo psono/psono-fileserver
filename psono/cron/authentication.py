@@ -13,7 +13,7 @@ class CronAuthentication(BaseAuthentication):
     def authenticate(self, request):
         cron_access_key = self.get_cron_access_key(request)
 
-        if cron_access_key != settings.CRON_ACCESS_KEY:
+        if not cron_access_key or cron_access_key != settings.CRON_ACCESS_KEY:
             msg = _('Invalid access key')
             raise exceptions.AuthenticationFailed(msg)
 
