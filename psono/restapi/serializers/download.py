@@ -53,7 +53,7 @@ class DownloadSerializer(serializers.Serializer):
             raise exceptions.ValidationError(msg)
 
         if hash_checksum is None:
-            msg = _("Blake2b hash is missing.")
+            msg = _("Hash is missing.")
             raise exceptions.ValidationError(msg)
 
         if shard_id not in settings.SHARDS_DICT:

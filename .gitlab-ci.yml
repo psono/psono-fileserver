@@ -37,7 +37,7 @@ run-unittests-ubuntu1804:
   except:
     - schedules
   stage: test
-  image: psono-docker.jfrog.io/docker:git
+  image: psono-docker.jfrog.io/docker:19.03.8-git
   variables:
     POSTGRES_DB: postgres
     POSTGRES_USER: postgres
@@ -64,7 +64,7 @@ run-unittests-alpine:
   except:
     - schedules
   stage: test
-  image: psono-docker.jfrog.io/docker:git
+  image: psono-docker.jfrog.io/docker:19.03.8-git
   variables:
     POSTGRES_DB: postgres
     POSTGRES_USER: postgres
@@ -90,7 +90,7 @@ run-unittests-alpine:
 #  except:
 #    - schedules
 #  stage: test
-#  image: psono-docker.jfrog.io/docker:git
+#  image: psono-docker.jfrog.io/docker:19.03.8-git
 #  variables:
 #    POSTGRES_DB: postgres
 #    POSTGRES_USER: postgres
@@ -117,7 +117,7 @@ run-vulnerability-scan:
   except:
     - schedules
   stage: test
-  image: psono-docker.jfrog.io/docker:git
+  image: psono-docker.jfrog.io/docker:19.03.8-git
   services:
     - docker:18-dind
   script:
@@ -133,7 +133,7 @@ run-vulnerability-scan:
 #  except:
 #    - schedules
 #  stage: deploy
-#  image: psono-docker.jfrog.io/docker:git
+#  image: psono-docker.jfrog.io/docker:19.03.8-git
 #  services:
 #    - docker:18-dind
 #  script:
@@ -149,7 +149,7 @@ release-container:
   except:
     - schedules
   stage: release
-  image: psono-docker.jfrog.io/docker:git
+  image: psono-docker.jfrog.io/docker:19.03.8-git
   services:
     - docker:18-dind
   script:
@@ -167,7 +167,7 @@ release-version-bump:
   except:
     - schedules
   stage: release
-  image: psono-docker.jfrog.io/docker:git
+  image: psono-docker.jfrog.io/docker:19.03.8-git
   script:
     - mkdir -p /root/.ssh
     - echo "$github_deploy_key" > /root/.ssh/id_rsa
@@ -191,7 +191,7 @@ deploy:
   except:
     - schedules
   stage: deploy
-  image: psono-docker.jfrog.io/docker:git
+  image: psono-docker.jfrog.io/docker:19.03.8-git
   services:
     - docker:18-dind
   script:

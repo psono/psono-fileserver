@@ -33,10 +33,13 @@ class HealthCheckView(GenericAPIView):
 
         def time_sync_unhealthy():
             c = ntplib.NTPClient()
-            response = c.request(settings.TIME_SERVER, version=3)
+            try:
+                response = c.request(settings.TIME_SERVER, version=3)
+            except:
+                return True
             return abs(response.offset) > 1
 
-        if time_sync_unhealthy():
+        if settings.HEALTHCHECK_TIME_SYNC_ENABLED and time_sync_unhealthy():
             unhealthy = True
             time_sync = False
 
