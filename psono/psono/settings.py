@@ -104,6 +104,8 @@ SERVER_URL_VERIFY_SSL = config_get('SERVER_URL_VERIFY_SSL', True)
 FILESERVER_ID = str(uuid.uuid4())
 FILESERVER_SESSION_KEY = nacl.encoding.HexEncoder.encode(nacl.utils.random(nacl.secret.SecretBox.KEY_SIZE)).decode()
 
+HEALTHCHECK_TIME_SYNC_ENABLED = str(config_get('HEALTHCHECK_TIME_SYNC_ENABLED', True)).lower() == 'true'
+
 FILE_UPLOAD_MAX_MEMORY_SIZE = config_get('FILE_UPLOAD_MAX_MEMORY_SIZE', global_settings.FILE_UPLOAD_MAX_MEMORY_SIZE)
 DATA_UPLOAD_MAX_MEMORY_SIZE = config_get('DATA_UPLOAD_MAX_MEMORY_SIZE', global_settings.DATA_UPLOAD_MAX_MEMORY_SIZE)
 FILE_UPLOAD_TEMP_DIR = config_get('FILE_UPLOAD_TEMP_DIR', global_settings.FILE_UPLOAD_TEMP_DIR)
