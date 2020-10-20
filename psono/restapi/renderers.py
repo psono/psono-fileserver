@@ -57,6 +57,9 @@ class EncryptJSONRenderer(JSONRenderer):
         if decrypted_data == b'':
             return decrypted_data
 
+        if not hasattr(renderer_context['request'].auth, 'secret_key'):
+            return decrypted_data
+
         session_secret_key = renderer_context['request'].auth.secret_key
 
         encrypted_data = encrypt(session_secret_key, decrypted_data)
