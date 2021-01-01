@@ -95,9 +95,9 @@ boto3==1.12.36
 botocore==1.15.49         # via boto3, s3transfer
 cachetools==4.1.1         # via google-auth
 certifi==2020.6.20        # via msrest, requests
-cffi==1.11.5
+cffi==1.14.4              # via azure-datalake-store, bcrypt, cryptography, pynacl
 chardet==3.0.4            # via requests
-cryptography==3.2.1       # via adal, azure-cosmosdb-table, azure-keyvault, azure-storage-common, paramiko
+cryptography==3.3.1       # via adal, azure-cosmosdb-table, azure-keyvault, azure-storage-common, paramiko
 defusedxml==0.6.0         # via python3-openid
 django-allauth==0.41.0
 django-cors-headers==3.2.0
