@@ -9,7 +9,6 @@ docker push psono/psono-fileserver:latest
 
 # Inform production stage about new image
 curl -X POST https://hooks.microbadger.com/images/psono/psono-fileserver/8BDLpDMSMHR-Ias4JAPRhy0f-cg=
-curl -X POST $psono_image_updater_url
 
 # Deploy to GitHub
 echo "Clonging gitlab.com/psono/psono-fileserver.git"
