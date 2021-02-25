@@ -358,7 +358,7 @@ django-redis==4.10.0
     # via -r requirements.in
 django-rest-auth==0.9.5
     # via -r requirements.in
-django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.9.1
+django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.11.1
     # via -r requirements.in
 django==2.2.14
     # via
@@ -571,6 +571,7 @@ s3transfer==0.3.3
 six==1.15.0
     # via
     #   bcrypt
+    #   cryptography
     #   django-rest-auth
     #   dropbox
     #   google-api-core

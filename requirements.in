@@ -21,4 +21,4 @@ apache-libcloud==2.4.0
 boto3==1.12.36
 paramiko==2.4.2
 
-django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.9.1
+django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.11.1
