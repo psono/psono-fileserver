@@ -360,7 +360,7 @@ django-rest-auth==0.9.5
     # via -r requirements.in
 django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.11.1
     # via -r requirements.in
-django==2.2.14
+django==2.2.19
     # via
     #   -r requirements.in
     #   django-allauth
@@ -540,7 +540,7 @@ pytz==2020.1
     # via
     #   django
     #   google-api-core
-pyyaml==5.3.1
+pyyaml==5.4.1
     # via -r requirements.in
 redis==3.5.3
     # via django-redis
