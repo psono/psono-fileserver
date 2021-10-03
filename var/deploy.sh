@@ -7,8 +7,9 @@ docker pull psono-docker.jfrog.io/psono/psono-fileserver:latest
 docker tag psono-docker.jfrog.io/psono/psono-fileserver:latest psono/psono-fileserver:latest
 docker push psono/psono-fileserver:latest
 
-# Inform production stage about new image
-curl -X POST https://hooks.microbadger.com/images/psono/psono-fileserver/8BDLpDMSMHR-Ias4JAPRhy0f-cg=
+export docker_version_tag=$(echo $CI_COMMIT_TAG | awk  '{ string=substr($0, 2, 100); print string; }' )
+docker tag psono-docker.jfrog.io/psono/psono-fileserver:latest psono/psono-fileserver:$docker_version_tag
+docker push psono/psono-fileserver:$docker_version_tag
 
 # Deploy to GitHub
 echo "Clonging gitlab.com/psono/psono-fileserver.git"

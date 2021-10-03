@@ -583,7 +583,7 @@ six==1.15.0
     #   protobuf
     #   pynacl
     #   python-dateutil
-sqlparse==0.3.1
+sqlparse==0.4.2
     # via django
 urllib3==1.25.9
     # via
