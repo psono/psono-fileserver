@@ -360,7 +360,7 @@ django-rest-auth==0.9.5
     # via -r requirements.in
 django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.11.1
     # via -r requirements.in
-django==2.2.24
+django==2.2.25
     # via
     #   -r requirements.in
     #   django-allauth
