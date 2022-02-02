@@ -1,1 +1,1 @@
-0.2.4 (Build 5590feb3)
+0.2.5 (Build e5f8c6e8)
