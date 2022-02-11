@@ -1,7 +1,5 @@
 from rest_framework import status
-from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
-from django.core.files.storage import get_storage_class
 from rest_framework import serializers, exceptions
 
 from ..utils import get_ip, APIServer, get_storage
@@ -29,35 +27,35 @@ class DownloadSerializer(serializers.Serializer):
         })
 
         if status.is_server_error(r.status_code):
-            msg = _("Server is offline.")
+            msg = "Server is offline."
             raise exceptions.ValidationError(msg)
 
         if not r.json_decrypted:
-            msg = _("Server returned un-decryptable response.")
+            msg = "Server returned un-decryptable response."
             raise exceptions.ValidationError(msg)
 
         non_field_errors = r.json_decrypted.get('non_field_errors', None)
         if non_field_errors:
-            msg = _('; '.join(non_field_errors))
+            msg = '; '.join(non_field_errors)
             raise exceptions.ValidationError(msg)
 
         if not status.is_success(r.status_code):
-            msg = _("Unknown error reported by server.")
+            msg = "Unknown error reported by server."
             raise exceptions.ValidationError(msg)
 
         shard_id = r.json_decrypted.get('shard_id', None)
         hash_checksum = r.json_decrypted.get('hash_checksum', None)
 
         if shard_id is None:
-            msg = _("Shard ID is missing.")
+            msg = "Shard ID is missing."
             raise exceptions.ValidationError(msg)
 
         if hash_checksum is None:
-            msg = _("Hash is missing.")
+            msg = "Hash is missing."
             raise exceptions.ValidationError(msg)
 
         if shard_id not in settings.SHARDS_DICT:
-            msg = _("Unknown Shard ID")
+            msg = "Unknown Shard ID"
             raise exceptions.ValidationError(msg)
 
         shard_config = settings.SHARDS_DICT[shard_id]
@@ -74,7 +72,7 @@ class DownloadSerializer(serializers.Serializer):
                 'ip_address': get_ip(self.context['request']),
             })
 
-            msg = _("CHUNK_NOT_AVAILABLE")
+            msg = "CHUNK_NOT_AVAILABLE"
             raise exceptions.ValidationError(msg)
 
         attrs['chunk'] = storage.open(target_path)
