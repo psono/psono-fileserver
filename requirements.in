@@ -1,8 +1,8 @@
-django==2.2.26
-djangorestframework==3.12.1
+django==3.2.12
+djangorestframework==3.13.1
 django-rest-auth==0.9.5
 django-allauth==0.47.0
-django-cors-headers==3.2.0
+django-cors-headers==3.10.1
 markdown==3.0.1
 django-filter==2.4.0
 PyYAML==5.4.1
@@ -17,7 +17,7 @@ google-cloud-storage==1.29.0
 azure==4.0.0
 azure-storage-blob==1.4.0
 dropbox==9.3.0
-apache-libcloud==2.4.0
+apache-libcloud==2.8.3
 boto3==1.20.46
 paramiko==2.4.2
 

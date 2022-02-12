@@ -5,21 +5,18 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 Examples:
 Function views
     1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+    2. Add a URL to urlpatterns:  re_path(r'^$', views.home, name='home')
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+    2. Add a URL to urlpatterns:  re_path(r'^$', Home.as_view(), name='home')
 Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
+    2. Add a URL to urlpatterns:  re_path(r'^blog/', include(blog_urls))
 """
-from django.conf.urls import url
-from django.conf import settings
-from os.path import join, dirname, abspath
-import django
+from django.urls import re_path
 from . import views
 
 urlpatterns = [
-    url(r'^ping/$', views.PingView.as_view(), name='ping'),
-    url(r'^cleanup/chunks/$', views.CleanupChunksView.as_view(), name='cleanup_chunks'),
+    re_path(r'^ping/$', views.PingView.as_view(), name='ping'),
+    re_path(r'^cleanup/chunks/$', views.CleanupChunksView.as_view(), name='cleanup_chunks'),
 ]

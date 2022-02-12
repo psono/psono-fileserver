@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.urls import re_path, include
 from rest_framework import routers
 
 router = routers.DefaultRouter()
@@ -21,11 +21,11 @@ router = routers.DefaultRouter()
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    #url(r'^', include(router.urls)),
-    #url(r'^accounts/', include('allauth.urls')),
-    #url(r'^rest-auth/', include('rest_auth.urls')),
-    #url(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
-    url(r'^', include('restapi.urls')),
-    url(r'^cron/', include('cron.urls')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    #re_path(r'^', include(router.urls)),
+    #re_path(r'^accounts/', include('allauth.urls')),
+    #re_path(r'^rest-auth/', include('rest_auth.urls')),
+    #re_path(r'^rest-auth/registration/', include('rest_auth.registration.urls')),
+    re_path(r'^', include('restapi.urls')),
+    re_path(r'^cron/', include('cron.urls')),
+    re_path(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

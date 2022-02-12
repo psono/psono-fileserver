@@ -1,5 +1,4 @@
 from rest_framework import status
-from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 from rest_framework import serializers, exceptions
 
@@ -18,19 +17,19 @@ class UploadSerializer(serializers.Serializer):
         ticket_nonce = self.context['request'].data.get('ticket_nonce', None)
 
         if file_transfer_id is None:
-            msg = _("File transfer id is required.")
+            msg = "File transfer id is required."
             raise exceptions.ValidationError(msg)
 
         if chunk is None:
-            msg = _("File is required.")
+            msg = "File is required."
             raise exceptions.ValidationError(msg)
 
         if ticket is None:
-            msg = _("Ticket is required.")
+            msg = "Ticket is required."
             raise exceptions.ValidationError(msg)
 
         if ticket_nonce is None:
-            msg = _("Ticket nonce is required.")
+            msg = "Ticket nonce is required."
             raise exceptions.ValidationError(msg)
 
         chunk_content = chunk.read()
@@ -50,30 +49,30 @@ class UploadSerializer(serializers.Serializer):
         })
 
         if status.is_server_error(r.status_code):
-            msg = _("Server is offline.")
+            msg = "Server is offline."
             raise exceptions.ValidationError(msg)
 
         if not r.json_decrypted:
-            msg = _("Server returned un-decryptable response.")
+            msg = "Server returned un-decryptable response."
             raise exceptions.ValidationError(msg)
 
         non_field_errors = r.json_decrypted.get('non_field_errors', None)
         if non_field_errors:
-            msg = _('; '.join(non_field_errors))
+            msg = '; '.join(non_field_errors)
             raise exceptions.ValidationError(msg)
 
         if not status.is_success(r.status_code):
-            msg = _("Unknown error reported by server.")
+            msg = "Unknown error reported by server."
             raise exceptions.ValidationError(msg)
 
         shard_id = r.json_decrypted.get('shard_id', None)
 
         if shard_id is None:
-            msg = _("Shard ID is missing.")
+            msg = "Shard ID is missing."
             raise exceptions.ValidationError(msg)
 
         if shard_id not in settings.SHARDS_DICT:
-            msg = _("Unknown Shard ID")
+            msg = "Unknown Shard ID"
             raise exceptions.ValidationError(msg)
 
         shard_config = settings.SHARDS_DICT[shard_id]
