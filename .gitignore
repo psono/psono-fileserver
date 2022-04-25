@@ -10,3 +10,4 @@ htmlcov/
 test/
 psono/static/admin
 psono/static/rest_framework
+.venv*
