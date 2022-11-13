@@ -99,6 +99,14 @@ run-unittests-alpine:
     - sleep 20
     - docker run --link db:postgres $CONTAINER_TEST_IMAGE /bin/sh -c "pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && python3 ./psono/manage.py test --parallel=8 restapi.tests cron.tests"
 
+run-vulnerability-python-dependencies:
+  except:
+    - schedules
+  stage: test
+  image: python:3.11-buster
+  script:
+    - pip3 install pip-audit==2.4.5
+    - pip-audit -r ./requirements.txt
 
 run-vulnerability-scan:
   except:
@@ -115,11 +123,10 @@ run-vulnerability-scan:
     DOCKER_TLS_CERTDIR: ""
   script:
     - docker info
-    - echo $CI_JOB_TOKEN | docker login --username=gitlab-ci-token --password-stdin registry.gitlab.com
+#    - echo $CI_JOB_TOKEN | docker login --username=gitlab-ci-token --password-stdin registry.gitlab.com
     - echo $artifactory_credentials | docker login --username=gitlab --password-stdin psono-docker.jfrog.io
-    - echo $docker_hub_credentials | docker login --username=psonogitlab --password-stdin
+#    - echo $docker_hub_credentials | docker login --username=psonogitlab --password-stdin
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run -e "LANG=C.UTF-8" $CONTAINER_TEST_IMAGE sh -c "pip3 install safety==1.10.3 && safety check"
     - docker run -e "LANG=C.UTF-8" $CONTAINER_TEST_IMAGE sh -c "pip3 install bandit && bandit -r /root -x /root/psono/restapi/tests,/root/psono/administration/tests"
 
 #deploy-security-scan-image:
