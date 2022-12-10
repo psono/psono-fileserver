@@ -4,49 +4,52 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
-apache-libcloud==2.8.3
+apache-libcloud==3.6.1
     # via
     #   -r requirements.in
     #   django-storages
-asgiref==3.4.1
+asgiref==3.5.2
     # via django
-azure-core==1.24.2
+async-timeout==4.0.2
+    # via redis
+azure-core==1.26.1
     # via
     #   azure-storage-blob
     #   msrest
-azure-storage-blob==12.13.0
+azure-storage-blob==12.14.1
     # via django-storages
-bcrypt==3.1.7
+bcrypt==4.0.1
     # via paramiko
-boto3==1.20.46
+boto3==1.26.8
     # via
     #   -r requirements.in
     #   django-storages
-botocore==1.23.46
+botocore==1.29.8
     # via
     #   boto3
     #   s3transfer
-cachetools==4.1.1
+cachetools==4.2.4
     # via google-auth
-certifi==2021.10.8
+certifi==2022.12.7
     # via
     #   msrest
     #   requests
 cffi==1.15.1
     # via
-    #   bcrypt
     #   cryptography
     #   pynacl
-charset-normalizer==2.0.11
+charset-normalizer==2.0.12
     # via requests
-cryptography==3.3.2
+cryptography==38.0.3
     # via
     #   azure-storage-blob
     #   paramiko
     #   pyjwt
-defusedxml==0.6.0
+defusedxml==0.7.1
     # via python3-openid
-django==3.2.15
+deprecated==1.2.13
+    # via redis
+django==3.2.16
     # via
     #   -r requirements.in
     #   django-allauth
@@ -66,33 +69,38 @@ django-redis==4.10.0
     # via -r requirements.in
 django-rest-auth==0.9.5
     # via -r requirements.in
-django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.12.3
+django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.13.1
     # via -r requirements.in
 djangorestframework==3.13.1
     # via
     #   -r requirements.in
     #   django-rest-auth
-dropbox==9.3.0
+dropbox==11.36.0
     # via
     #   -r requirements.in
     #   django-storages
-google-api-core==1.21.0
-    # via google-cloud-core
-google-auth==1.18.0
+google-api-core==2.10.2
+    # via
+    #   google-cloud-core
+    #   google-cloud-storage
+google-auth==1.35.0
     # via
     #   google-api-core
+    #   google-cloud-core
     #   google-cloud-storage
-google-cloud-core==1.3.0
+google-cloud-core==2.3.2
     # via google-cloud-storage
-google-cloud-storage==1.29.0
+google-cloud-storage==2.6.0
     # via
     #   -r requirements.in
     #   django-storages
-google-resumable-media==0.5.1
+google-crc32c==1.5.0
+    # via google-resumable-media
+google-resumable-media==2.4.0
     # via google-cloud-storage
-googleapis-common-protos==1.52.0
+googleapis-common-protos==1.56.4
     # via google-api-core
-idna==3.3
+idna==3.4
     # via requests
 isodate==0.6.1
     # via msrest
@@ -108,47 +116,51 @@ msrest==0.7.1
     # via azure-storage-blob
 ntplib==0.3.4
     # via -r requirements.in
-oauthlib==3.2.0
+oauthlib==3.2.2
     # via requests-oauthlib
-paramiko==2.4.2
+packaging==21.3
+    # via redis
+paramiko==2.12.0
     # via
     #   -r requirements.in
     #   django-storages
-protobuf==3.12.2
+ply==3.11
+    # via stone
+protobuf==4.21.9
     # via
     #   google-api-core
     #   googleapis-common-protos
 pyasn1==0.4.8
     # via
-    #   paramiko
     #   pyasn1-modules
     #   rsa
 pyasn1-modules==0.2.8
     # via google-auth
-pycparser==2.20
+pycparser==2.21
     # via cffi
-pyjwt[crypto]==2.4.0
+pyjwt[crypto]==2.6.0
     # via django-allauth
 pynacl==1.5.0
     # via
     #   -r requirements.in
     #   paramiko
+pyparsing==3.0.9
+    # via packaging
 python-dateutil==2.7.5
     # via
     #   -r requirements.in
     #   botocore
 python3-openid==3.2.0
     # via django-allauth
-pytz==2022.1
+pytz==2022.6
     # via
     #   django
     #   djangorestframework
-    #   google-api-core
 pyyaml==5.4.1
     # via -r requirements.in
-redis==3.5.3
+redis==4.3.4
     # via django-redis
-requests==2.27.1
+requests==2.28.1
     # via
     #   -r requirements.in
     #   apache-libcloud
@@ -156,38 +168,39 @@ requests==2.27.1
     #   django-allauth
     #   dropbox
     #   google-api-core
+    #   google-cloud-storage
     #   msrest
     #   requests-oauthlib
 requests-oauthlib==1.3.1
     # via
     #   django-allauth
     #   msrest
-rsa==4.6
+rsa==4.9
     # via google-auth
-s3transfer==0.5.0
+s3transfer==0.6.0
     # via boto3
 six==1.16.0
     # via
     #   azure-core
-    #   bcrypt
-    #   cryptography
     #   django-rest-auth
     #   dropbox
-    #   google-api-core
     #   google-auth
-    #   google-resumable-media
-    #   isodate
     #   more-itertools
-    #   protobuf
+    #   paramiko
     #   python-dateutil
-sqlparse==0.4.2
+    #   stone
+sqlparse==0.4.3
     # via django
-typing-extensions==4.3.0
+stone==3.3.1
+    # via dropbox
+typing-extensions==4.4.0
     # via azure-core
-urllib3==1.26.8
+urllib3==1.26.12
     # via
     #   botocore
     #   requests
+wrapt==1.14.1
+    # via deprecated
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
