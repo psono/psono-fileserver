@@ -1,4 +1,4 @@
-django==3.2.16
+django==3.2.18
 djangorestframework==3.13.1
 django-rest-auth==0.9.5
 django-allauth==0.47.0
@@ -14,9 +14,8 @@ python-dateutil==2.7.5
 requests==2.28.1
 
 google-cloud-storage==2.6.0
-dropbox==11.36.0
 apache-libcloud==3.6.1
 boto3==1.26.8
 paramiko==2.12.0
 
-django-storages[azure,boto3,dropbox,google,libcloud,sftp]==1.13.1
+django-storages[azure,boto3,google,libcloud,sftp]==1.13.1
