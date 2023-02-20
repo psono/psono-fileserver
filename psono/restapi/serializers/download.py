@@ -1,11 +1,13 @@
+
+import os
+import re
+
 from rest_framework import status
 from django.conf import settings
 from rest_framework import serializers, exceptions
 
 from ..utils import get_ip, APIServer, get_storage
 from ..fields import UUIDField
-
-import os
 
 
 class DownloadSerializer(serializers.Serializer):
@@ -52,6 +54,10 @@ class DownloadSerializer(serializers.Serializer):
 
         if hash_checksum is None:
             msg = "Hash is missing."
+            raise exceptions.ValidationError(msg)
+
+        if not re.match('^[0-9a-f]*$', hash_checksum, re.IGNORECASE):
+            msg = 'HASH_CHECKSUM_NOT_IN_HEX_REPRESENTATION'
             raise exceptions.ValidationError(msg)
 
         if shard_id not in settings.SHARDS_DICT:
