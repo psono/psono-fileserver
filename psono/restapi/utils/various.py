@@ -19,16 +19,24 @@ def get_os_username():
         return 'unknown'
 
 def get_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR', None)
-    cf_connection_ip = request.META.get('HTTP_CF_CONNECTING_IP', None)
+    """
+    Analyzes a request and returns the ip of the client.
 
-    if cf_connection_ip:
-        return cf_connection_ip
-
-    if x_forwarded_for:
-        splitted_ip_record = x_forwarded_for.split(',')
-        ip_address = splitted_ip_record[0].strip()
+    :param request:
+    :return:
+    """
+    if settings.TRUSTED_IP_HEADER and request.META.get(settings.TRUSTED_IP_HEADER, None):
+        return request.META.get(settings.TRUSTED_IP_HEADER, None)
     else:
-        ip_address = request.META.get('REMOTE_ADDR')
+        xff = request.META.get('HTTP_X_FORWARDED_FOR')
+        remote_addr = request.META.get('REMOTE_ADDR')
+        num_proxies = settings.NUM_PROXIES
 
-    return ip_address
+        if num_proxies is not None:
+            if num_proxies == 0 or xff is None:
+                return remote_addr
+            addrs = xff.split(',')
+            client_addr = addrs[-min(num_proxies, len(addrs))]
+            return client_addr.strip()
+
+        return remote_addr

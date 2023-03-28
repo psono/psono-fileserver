@@ -156,6 +156,13 @@ PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher'
 )
 
+TRUSTED_COUNTRY_HEADER = config_get('TRUSTED_COUNTRY_HEADER', None)  # e.g. HTTP_CF_IPCOUNTRY
+TRUSTED_IP_HEADER = config_get('TRUSTED_IP_HEADER', None)  # e.g. HTTP_CF_CONNECTING_IP
+
+NUM_PROXIES = config_get('NUM_PROXIES', None)
+if NUM_PROXIES is not None:
+    NUM_PROXIES = int(NUM_PROXIES)
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAdminUser',
@@ -170,9 +177,9 @@ REST_FRAMEWORK = {
         # 'rest_framework.renderers.BrowsableAPIRenderer',
     ),
     'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.AnonRateThrottle',
-        'rest_framework.throttling.UserRateThrottle',
-        'rest_framework.throttling.ScopedRateThrottle',
+        'restapi.throttling.AnonRateThrottle',
+        'restapi.throttling.UserRateThrottle',
+        'restapi.throttling.ScopedRateThrottle',
     ),
     'DEFAULT_THROTTLE_RATES': {
         'anon': '1440/day',
