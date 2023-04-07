@@ -6,6 +6,8 @@ from django.conf import settings
 
 import ntplib
 
+from restapi.utils.various import get_ip
+
 
 class HealthCheckView(GenericAPIView):
     permission_classes = (AllowAny,)
@@ -56,6 +58,7 @@ class HealthCheckView(GenericAPIView):
         return Response({
             'time_sync': {'healthy': time_sync},
             'debug_mode': {'healthy': not_debug_mode},
+            '_info': { 'ip': get_ip(request) },
         }, status=health_status)
 
     def put(self, *args, **kwargs):
