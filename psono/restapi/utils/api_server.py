@@ -38,11 +38,11 @@ class APIServer(object):
             requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
         if method == 'POST':
-            r = requests.post(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
+            r = requests.post(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
         elif method == 'PUT':
-            r = requests.put(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
+            r = requests.put(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
         elif method == 'GET':
-            r = requests.get(settings.SERVER_URL + '/fileserver' + endpoint, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers)
+            r = requests.get(settings.SERVER_URL + '/fileserver' + endpoint, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
         else:
             raise Exception
 
