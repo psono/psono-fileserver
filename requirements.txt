@@ -63,7 +63,7 @@ django-cors-headers==3.10.1
     # via -r requirements.in
 django-filter==2.4.0
     # via -r requirements.in
-django-redis==4.10.0
+django-redis==5.2.0
     # via -r requirements.in
 django-rest-auth==0.9.5
     # via -r requirements.in
