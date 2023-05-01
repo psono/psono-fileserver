@@ -63,7 +63,7 @@ django-cors-headers==3.10.1
     # via -r requirements.in
 django-filter==2.4.0
     # via -r requirements.in
-django-redis==4.10.0
+django-redis==5.2.0
     # via -r requirements.in
 django-rest-auth==0.9.5
     # via -r requirements.in
@@ -174,7 +174,7 @@ six==1.16.0
     #   more-itertools
     #   paramiko
     #   python-dateutil
-sqlparse==0.4.3
+sqlparse==0.4.4
     # via django
 typing-extensions==4.4.0
     # via azure-core
