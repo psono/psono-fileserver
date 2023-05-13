@@ -33,6 +33,8 @@ class DownloadSerializer(serializers.Serializer):
             raise exceptions.ValidationError(msg)
 
         if not r.json_decrypted:
+            if settings.DEBUG:
+                print(f"{r.status_code}: {r.text}")
             msg = "Server returned un-decryptable response."
             raise exceptions.ValidationError(msg)
 
