@@ -1,11 +1,11 @@
-django==3.2.19
+django==3.2.20
 djangorestframework==3.13.1
 django-rest-auth==0.9.5
 django-allauth==0.47.0
 django-cors-headers==3.10.1
 markdown==3.0.1
 django-filter==2.4.0
-PyYAML==5.4.1
+PyYAML==6.0.1
 more-itertools==5.0.0
 PyNaCl==1.5.0
 django-redis==5.2.0
