@@ -30,7 +30,7 @@ botocore==1.29.8
     #   s3transfer
 cachetools==4.2.4
     # via google-auth
-certifi==2022.12.7
+certifi==2023.7.22
     # via
     #   msrest
     #   requests
@@ -40,7 +40,7 @@ cffi==1.15.1
     #   pynacl
 charset-normalizer==2.0.12
     # via requests
-cryptography==41.0.2
+cryptography==41.0.3
     # via
     #   azure-storage-blob
     #   paramiko
