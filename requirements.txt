@@ -40,14 +40,14 @@ cffi==1.15.1
     #   pynacl
 charset-normalizer==2.0.12
     # via requests
-cryptography==41.0.3
+cryptography==41.0.4
     # via
     #   azure-storage-blob
     #   paramiko
     #   pyjwt
 defusedxml==0.7.1
     # via python3-openid
-django==3.2.20
+django==3.2.23
     # via
     #   -r requirements.in
     #   django-allauth
@@ -178,7 +178,7 @@ sqlparse==0.4.4
     # via django
 typing-extensions==4.4.0
     # via azure-core
-urllib3==1.26.12
+urllib3==1.26.18
     # via
     #   botocore
     #   requests
