@@ -1,1 +1,1 @@
-1.2.0 (Build 8fe223bf)
+1.2.0 (Build 6bcece2a)
