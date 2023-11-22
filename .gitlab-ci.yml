@@ -184,7 +184,7 @@ release-container:
   except:
     - schedules
   stage: release
-  image: psono-docker.jfrog.io/ubuntu:22.04
+  image: psono-docker.jfrog.io/docker:24.0.7-git
   services:
     - name: docker:24-dind
       alias: docker
