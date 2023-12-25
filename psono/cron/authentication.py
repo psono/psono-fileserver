@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.utils.crypto import constant_time_compare
 from rest_framework.authentication import BaseAuthentication, get_authorization_header
 from rest_framework import exceptions
 
@@ -12,7 +13,7 @@ class CronAuthentication(BaseAuthentication):
     def authenticate(self, request):
         cron_access_key = self.get_cron_access_key(request)
 
-        if not cron_access_key or cron_access_key != settings.CRON_ACCESS_KEY:
+        if not cron_access_key or not constant_time_compare(cron_access_key, settings.CRON_ACCESS_KEY) or not settings.CRON_ACCESS_KEY:
             msg = 'Invalid access key'
             raise exceptions.AuthenticationFailed(msg)
 

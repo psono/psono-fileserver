@@ -112,7 +112,7 @@ ntplib==0.3.4
     # via -r requirements.in
 oauthlib==3.2.2
     # via requests-oauthlib
-paramiko==2.12.0
+paramiko==3.4.0
     # via
     #   -r requirements.in
     #   django-storages
@@ -172,7 +172,6 @@ six==1.16.0
     #   django-rest-auth
     #   google-auth
     #   more-itertools
-    #   paramiko
     #   python-dateutil
 sqlparse==0.4.4
     # via django
