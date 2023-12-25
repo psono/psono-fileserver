@@ -16,6 +16,6 @@ requests==2.31.0
 google-cloud-storage==2.6.0
 apache-libcloud==3.6.1
 boto3==1.26.8
-paramiko==2.12.0
+paramiko==3.4.0
 
 django-storages[azure,boto3,google,libcloud,sftp]==1.13.1
