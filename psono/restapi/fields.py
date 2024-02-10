@@ -1,6 +1,5 @@
 from rest_framework.serializers import UUIDField as InsecureUUIDField
 from rest_framework.serializers import BooleanField as InsecureBooleanField
-from rest_framework.serializers import NullBooleanField as InsecureNullBooleanField
 
 
 
@@ -16,8 +15,3 @@ class BooleanField(InsecureBooleanField):
         'invalid': 'Is not a valid boolean.'
     }
 
-class NullBooleanField(InsecureNullBooleanField):
-    # Minimizes Reflected XSS
-    default_error_messages = {
-        'invalid': 'Is not a valid boolean.'
-    }
