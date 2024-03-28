@@ -61,9 +61,6 @@ run-unittests-ubuntu:
     POSTGRES_DB: postgres
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: ""
-    PSONO_EMAIL_HOST: 172.17.0.1
-    PSONO_EMAIL_FROM: test@example.com
-    PSONO_ACTIVATION_LINK_SECRET: 9SruC2qPmKScVzGaF4378LW4rvNNkK2G3Gddqy9kPQqgkjeDQjs7jaLBCstgtJTt
     PSONO_SECRET_KEY: RQTKawYQv4w6KkuphcLzLu7r5ap7xE5DSDu5SkKXjMnWBQ93mcMKjdZfeZkY2Y7C
   script:
     - docker info
@@ -72,7 +69,7 @@ run-unittests-ubuntu:
     - echo $docker_hub_credentials | docker login --username=psonogitlab --password-stdin
     - sh ./var/update_version.sh
     - docker build -f DockerfileUbuntu -t ubu-testimage --pull .
-    - docker run -d --name db postgres:9.6.16
+    - docker run -d -e POSTGRES_HOST_AUTH_METHOD=trust --name db postgres:15.5-alpine
     - sleep 20
     - docker run --link db:postgres ubu-testimage bash -c "apt-get update && apt-get install -y python3-pip && pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && coverage3 run --source='.' ./psono/manage.py test restapi.tests cron.tests && coverage3 report --omit=psono/restapi/migrations/*,psono/administration/tests*,psono/administration/migrations/*,psono/restapi/tests*"
 
@@ -93,9 +90,6 @@ run-unittests-alpine:
     POSTGRES_DB: postgres
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: ""
-    PSONO_EMAIL_HOST: 172.17.0.1
-    PSONO_EMAIL_FROM: test@example.com
-    PSONO_ACTIVATION_LINK_SECRET: 9SruC2qPmKScVzGaF4378LW4rvNNkK2G3Gddqy9kPQqgkjeDQjs7jaLBCstgtJTt
     PSONO_SECRET_KEY: RQTKawYQv4w6KkuphcLzLu7r5ap7xE5DSDu5SkKXjMnWBQ93mcMKjdZfeZkY2Y7C
   script:
     - docker info
@@ -103,7 +97,7 @@ run-unittests-alpine:
     - echo $artifactory_credentials | docker login --username=gitlab --password-stdin psono-docker.jfrog.io
     - echo $docker_hub_credentials | docker login --username=psonogitlab --password-stdin
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run -d --name db postgres:9.6.16
+    - docker run -d -e POSTGRES_HOST_AUTH_METHOD=trust --name db postgres:15.5-alpine
     - sleep 20
     - docker run --link db:postgres $CONTAINER_TEST_IMAGE /bin/sh -c "pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && python3 ./psono/manage.py test --parallel=8 restapi.tests cron.tests"
   only:
@@ -128,9 +122,6 @@ run-unittests-alpine-arm64:
     POSTGRES_DB: postgres
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: ""
-    PSONO_EMAIL_HOST: 172.17.0.1
-    PSONO_EMAIL_FROM: test@example.com
-    PSONO_ACTIVATION_LINK_SECRET: 9SruC2qPmKScVzGaF4378LW4rvNNkK2G3Gddqy9kPQqgkjeDQjs7jaLBCstgtJTt
     PSONO_SECRET_KEY: RQTKawYQv4w6KkuphcLzLu7r5ap7xE5DSDu5SkKXjMnWBQ93mcMKjdZfeZkY2Y7C
   script:
     - docker info
@@ -138,7 +129,7 @@ run-unittests-alpine-arm64:
     - echo $artifactory_credentials | docker login --username=gitlab --password-stdin psono-docker.jfrog.io
     - echo $docker_hub_credentials | docker login --username=psonogitlab --password-stdin
     - docker pull $CONTAINER_TEST_IMAGE
-    - docker run -d --name db postgres:9.6.16
+    - docker run -d -e POSTGRES_HOST_AUTH_METHOD=trust --name db postgres:15.5-alpine
     - sleep 20
     - docker run --link db:postgres $CONTAINER_TEST_IMAGE /bin/sh -c "pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && python3 ./psono/manage.py test --parallel=8 restapi.tests cron.tests"
   only:
