@@ -97,7 +97,7 @@ google-resumable-media==2.7.0
     # via google-cloud-storage
 googleapis-common-protos==1.56.4
     # via google-api-core
-idna==3.4
+idna==3.7
     # via requests
 isodate==0.6.1
     # via msrest
