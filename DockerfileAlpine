@@ -20,7 +20,6 @@ RUN apk upgrade --no-cache && \
         linux-headers && \
     pip3 install --upgrade pip && \
     pip3 install -r requirements.txt && \
-    pip3 install uwsgi && \
     mkdir -p /root/.psono_fileserver /var/log/cron /opt/psono-shard && \
     echo "*/5     *       *       *       *       ( touch /tmp/psono_fileserver_cleanup && curl --header \"Authorization: Token \$(cat /root/PSONOFS_CRON_ACCESS_KEY)\" -f http://localhost/cron/cleanup/chunks/ && touch /tmp/psono_fileserver_cleanup_success )" >> /etc/crontabs/root && \
     echo "@reboot       ( touch /tmp/psono_fileserver_ping && python3 /root/psono/cron.py --token \"\$(cat /root/PSONOFS_CRON_ACCESS_KEY)\" --url http://localhost && touch /tmp/psono_fileserver_ping_success )" >> /etc/crontabs/root && \

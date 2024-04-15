@@ -125,6 +125,7 @@ AVAILABLE_FILESYSTEMS = {
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -262,7 +263,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'psono.wsgi.application'
-
+ASGI_APPLICATION = "psono.asgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
