@@ -73,7 +73,6 @@ django==4.2.11
     #   django-cors-headers
     #   django-filter
     #   django-redis
-    #   django-rest-auth
     #   django-storages
     #   djangorestframework
 django-allauth==0.47.0
@@ -84,14 +83,10 @@ django-filter==2.4.0
     # via -r requirements.in
 django-redis==5.2.0
     # via -r requirements.in
-django-rest-auth==0.9.5
-    # via -r requirements.in
 django-storages[azure,boto3,google,libcloud,sftp]==1.14.2
     # via -r requirements.in
 djangorestframework==3.14.0
-    # via
-    #   -r requirements.in
-    #   django-rest-auth
+    # via -r requirements.in
 google-api-core==2.10.2
     # via
     #   google-cloud-core
@@ -205,7 +200,6 @@ six==1.16.0
     # via
     #   automat
     #   azure-core
-    #   django-rest-auth
     #   isodate
     #   python-dateutil
 sqlparse==0.5.0
