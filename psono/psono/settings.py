@@ -183,11 +183,11 @@ REST_FRAMEWORK = {
         'restapi.throttling.ScopedRateThrottle',
     ),
     'DEFAULT_THROTTLE_RATES': {
-        'anon': '1440/day',
-        'user': '28800/day',
-        'health_check': '61/hour',
-        'cron': '61/minute',
-        'transfer': '61/minute'
+        'anon': config_get('THROTTLE_RATE_ANON', '1440/day'),
+        'user': config_get('THROTTLE_RATE_USER', '86400/day'),
+        'health_check': config_get('THROTTLE_RATE_HEALTH_CHECK', '61/hour'),
+        'cron': config_get('THROTTLE_RATE_CRON', '61/minute'),
+        'transfer': config_get('THROTTLE_RATE_TRANSFER', '61/minute'),
     },
 }
 
