@@ -14,9 +14,6 @@ Including another URLconf
     2. Add a URL to urlpatterns:  re_path(r'^blog/', include(blog_urls))
 """
 from django.urls import re_path
-from django.conf import settings
-from os.path import join, dirname, abspath
-import django
 from . import views
 
 urlpatterns = [
@@ -29,10 +26,3 @@ urlpatterns = [
     re_path(r'^info/$', views.InfoView.as_view(), name='info'),
 
 ]
-
-if settings.DEBUG:
-    # URLs for development purposes only
-    urlpatterns += [
-        re_path(r'^coverage/(?P<path>.*)$', django.views.static.serve,
-            {'document_root':join(dirname(abspath(__file__)), '..', '..', 'htmlcov')}),
-    ]
