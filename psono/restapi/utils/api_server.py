@@ -3,6 +3,7 @@ import requests
 import json
 import nacl.encoding
 import nacl.secret
+import nacl.utils
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 
 
@@ -24,23 +25,40 @@ class APIServer(object):
             r.json_decrypted = None
 
 
+    @staticmethod
+    def _encrypt(msg):
+
+        nonce = nacl.utils.random(nacl.secret.SecretBox.NONCE_SIZE)
+        encrypted = settings.SESSION_CRYPTO_BOX.encrypt(msg.encode(), nonce)
+
+        # cut away the nonce
+        text = encrypted[len(nonce):]
+
+        # convert nonce and encrypted msg to hex
+        nonce_hex = nacl.encoding.HexEncoder.encode(nonce).decode()
+        text_hex = nacl.encoding.HexEncoder.encode(text).decode()
+
+        return {'text': text_hex, 'nonce': nonce_hex}
+
 
     @staticmethod
     def query(method, endpoint, data=None, headers=None):
 
-        if not data:
-            data = {}
+        if data:
+            data = json.dumps(APIServer._encrypt(json.dumps(data)))
 
         if not headers:
-            headers = {}
+            headers = {
+                'content-type': 'application/json'
+            }
 
         if not settings.SERVER_URL_VERIFY_SSL:
             requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
         if method == 'POST':
-            r = requests.post(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
+            r = requests.post(settings.SERVER_URL + '/fileserver' + endpoint, data=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
         elif method == 'PUT':
-            r = requests.put(settings.SERVER_URL + '/fileserver' + endpoint, json=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
+            r = requests.put(settings.SERVER_URL + '/fileserver' + endpoint, data=data, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
         elif method == 'GET':
             r = requests.get(settings.SERVER_URL + '/fileserver' + endpoint, verify=settings.SERVER_URL_VERIFY_SSL, headers=headers, timeout=10.0)
         else:
@@ -62,7 +80,8 @@ class APIServer(object):
             'Authorization-Validator': json.dumps({
                 'fileserver_info': settings.FILESERVER_INFO,
                 'cluster_id': settings.CLUSTER_ID
-            })
+            }),
+            'content-type': 'application/json',
         }
 
         return APIServer.query(
@@ -81,6 +100,7 @@ class APIServer(object):
         data = None
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
+            'content-type': 'application/json',
         }
 
         return APIServer.query(
@@ -98,6 +118,7 @@ class APIServer(object):
         endpoint = '/chunks/cleanup/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
+            'content-type': 'application/json',
         }
 
         return APIServer.query(
@@ -115,6 +136,7 @@ class APIServer(object):
         endpoint = '/upload/authorize/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
+            'content-type': 'application/json',
         }
 
         return APIServer.query(
@@ -132,6 +154,7 @@ class APIServer(object):
         endpoint = '/download/authorize/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
+            'content-type': 'application/json',
         }
 
         return APIServer.query(
@@ -149,6 +172,7 @@ class APIServer(object):
         endpoint = '/download/revoke/'
         headers = {
             'Authorization': 'Token ' + settings.FILESERVER_ID,
+            'content-type': 'application/json',
         }
 
         return APIServer.query(
