@@ -1,14 +1,17 @@
+examples
 configs/apache
 configs/nginx
 demo
 .coverage
 .htmlcov
+*.deb
 .docs
 .dockerignore
 .git
 .docu
 docu
 .codeclimate.yml
+.mypy_cache
 .csslintrc
 .eslintignore
 .eslintrc.yml
