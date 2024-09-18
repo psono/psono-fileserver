@@ -14,14 +14,13 @@ asgiref==3.7.2
     #   django
 async-timeout==4.0.2
     # via redis
-attrs==23.2.0
+attrs==24.2.0
     # via
-    #   automat
     #   service-identity
     #   twisted
-autobahn==23.6.2
+autobahn==24.4.2
     # via daphne
-automat==22.10.0
+automat==24.8.1
     # via twisted
 azure-core==1.26.1
     # via
@@ -113,7 +112,7 @@ idna==3.7
     #   hyperlink
     #   requests
     #   twisted
-incremental==22.10.0
+incremental==24.7.2
     # via twisted
 isodate==0.6.1
     # via msrest
@@ -183,13 +182,12 @@ service-identity==24.1.0
     # via twisted
 six==1.16.0
     # via
-    #   automat
     #   azure-core
     #   isodate
     #   python-dateutil
 sqlparse==0.5.0
     # via django
-twisted[tls]==24.3.0
+twisted[tls]==24.7.0
     # via daphne
 txaio==23.1.1
     # via autobahn
@@ -201,7 +199,7 @@ urllib3==1.26.19
     # via
     #   botocore
     #   requests
-zope-interface==6.3
+zope-interface==7.0.3
     # via twisted
 
 # The following packages are considered to be unsafe in a requirements file:
