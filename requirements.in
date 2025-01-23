@@ -1,5 +1,5 @@
 daphne==4.1.2
-django==4.2.17
+django==4.2.18
 djangorestframework==3.15.2
 django-cors-headers==3.10.1
 markdown==3.2.1
@@ -7,7 +7,7 @@ django-filter==2.4.0
 PyYAML==6.0.1
 more_itertools==8.2.0
 PyNaCl==1.5.0
-django-redis==5.2.0
+django-redis==5.4.0
 ntplib==0.3.4
 python-dateutil==2.8.2
 requests==2.32.3
