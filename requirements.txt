@@ -76,7 +76,7 @@ django-filter==2.4.0
     # via -r requirements.in
 django-redis==5.4.0
     # via -r requirements.in
-django-storages[azure,boto3,google,libcloud,sftp]==1.14.2
+django-storages[azure,boto3,google,libcloud,sftp]==1.14.5
     # via -r requirements.in
 djangorestframework==3.15.2
     # via -r requirements.in
@@ -153,7 +153,7 @@ pynacl==1.5.0
     # via
     #   -r requirements.in
     #   paramiko
-pyopenssl==24.3.0
+pyopenssl==25.0.0
     # via twisted
 python-dateutil==2.8.2
     # via
@@ -191,9 +191,10 @@ twisted[tls]==24.7.0
     # via daphne
 txaio==23.1.1
     # via autobahn
-typing-extensions==4.4.0
+typing-extensions==4.12.2
     # via
     #   azure-core
+    #   pyopenssl
     #   twisted
 urllib3==1.26.19
     # via
