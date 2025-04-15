@@ -105,6 +105,7 @@ FILESERVER_ID = str(uuid.uuid4())
 FILESERVER_SESSION_KEY = nacl.encoding.HexEncoder.encode(nacl.utils.random(nacl.secret.SecretBox.KEY_SIZE)).decode()
 
 HEALTHCHECK_TIME_SYNC_ENABLED = str(config_get('HEALTHCHECK_TIME_SYNC_ENABLED', True)).lower() == 'true'
+HEALTHCHECK_MIN_DISK_SPACE = int(config_get('HEALTHCHECK_MIN_DISK_SPACE', 500 * 1024 * 1024)) # Default minimum disk space in bytes (500 MB)
 
 FILE_UPLOAD_MAX_MEMORY_SIZE = config_get('FILE_UPLOAD_MAX_MEMORY_SIZE', global_settings.FILE_UPLOAD_MAX_MEMORY_SIZE)
 DATA_UPLOAD_MAX_MEMORY_SIZE = config_get('DATA_UPLOAD_MAX_MEMORY_SIZE', global_settings.DATA_UPLOAD_MAX_MEMORY_SIZE)
@@ -163,6 +164,7 @@ TRUSTED_IP_HEADER = config_get('TRUSTED_IP_HEADER', None)  # e.g. HTTP_CF_CONNEC
 NUM_PROXIES = config_get('NUM_PROXIES', None)
 if NUM_PROXIES is not None:
     NUM_PROXIES = int(NUM_PROXIES)
+
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
