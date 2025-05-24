@@ -1,9 +1,37 @@
 import os
+import uuid
+import boto3
 from django.conf import settings
 from django.core.files.storage import get_storage_class
 
 def get_storage(engine):
-    return get_storage_class(settings.AVAILABLE_FILESYSTEMS[engine['class']])(**engine['kwargs'])
+    """
+    Dynamically returns a Django storage backend.
+    If a role_arn is provided in engine['kwargs'], it assumes the role using STS
+    and injects temporary credentials.
+    """
+    engine_class = engine['class']
+    config = engine['kwargs']
+    role_arn = config.get('role_arn')
+
+    if engine_class == 'amazon_s3' and role_arn:
+        client = boto3.client('sts').assume_role(
+            RoleArn=role_arn,
+            RoleSessionName=f"django-{uuid.uuid4()}"
+        )['Credentials']
+        # Injects temporary credentials and override exsiting keys
+        engine_kwargs = {
+            **config,
+            'access_key': client['AccessKeyId'],
+            'secret_key': client['SecretAccessKey'],
+            'session_token': client['SessionToken'],
+        }
+        # Don't pass role_arn to S3Boto3Storage
+        engine_kwargs.pop('role_arn', None)
+    else:
+        engine_kwargs = config
+
+    return get_storage_class(settings.AVAILABLE_FILESYSTEMS[engine['class']])(**engine_kwargs)
 
 def get_os_username():
 
