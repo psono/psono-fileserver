@@ -12,8 +12,6 @@ asgiref==3.7.2
     # via
     #   daphne
     #   django
-async-timeout==4.0.2
-    # via redis
 attrs==24.2.0
     # via
     #   service-identity
@@ -161,7 +159,7 @@ python-dateutil==2.8.2
     #   botocore
 pyyaml==6.0.1
     # via -r requirements.in
-redis==4.5.4
+redis==6.2.0
     # via django-redis
 requests==2.32.3
     # via
