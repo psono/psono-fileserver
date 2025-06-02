@@ -18,7 +18,7 @@ RUN apk upgrade --no-cache && \
         libffi-dev \
         openssl-dev \
         linux-headers && \
-    pip3 install --upgrade pip && \
+    pip3 install --upgrade setuptools pip && \
     pip3 install -r requirements.txt && \
     mkdir -p /root/.psono_fileserver /var/log/cron /opt/psono-shard && \
     echo "*/5     *       *       *       *       ( touch /tmp/psono_fileserver_cleanup && curl --header \"Authorization: Token \$(cat /root/PSONOFS_CRON_ACCESS_KEY)\" -f http://localhost/cron/cleanup/chunks/ && touch /tmp/psono_fileserver_cleanup_success )" >> /etc/crontabs/root && \
