@@ -36,7 +36,7 @@ build-container-alpine:
     - docker buildx create builder --use
     - docker buildx build --platform linux/amd64,linux/arm64 -f DockerfileAlpine -t $CONTAINER_TEST_IMAGE --push --pull .
   only:
-    - branches@psono/psono-fileserver
+    - branches@esaqa/psono/psono-fileserver
     - tags@psono/psono-fileserver
 
 
