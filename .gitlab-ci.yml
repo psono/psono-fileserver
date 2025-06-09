@@ -37,7 +37,7 @@ build-container-alpine:
     - docker buildx build --platform linux/amd64,linux/arm64 -f DockerfileAlpine -t $CONTAINER_TEST_IMAGE --push --pull .
   only:
     - branches@esaqa/psono/psono-fileserver
-    - tags@psono/psono-fileserver
+    - tags@esaqa/psono/psono-fileserver
 
 
 run-unittests-ubuntu:
@@ -91,8 +91,8 @@ run-unittests-alpine:
     - sleep 20
     - docker run --link db:postgres $CONTAINER_TEST_IMAGE /bin/sh -c "pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && python3 ./psono/manage.py test --parallel=8 restapi.tests cron.tests"
   only:
-    - branches@psono/psono-fileserver
-    - tags@psono/psono-fileserver
+    - branches@esaqa/psono/psono-fileserver
+    - tags@esaqa/psono/psono-fileserver
 
 run-unittests-alpine-arm64:
   except:
@@ -121,8 +121,8 @@ run-unittests-alpine-arm64:
     - sleep 20
     - docker run --link db:postgres $CONTAINER_TEST_IMAGE /bin/sh -c "pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && python3 ./psono/manage.py test --parallel=8 restapi.tests cron.tests"
   only:
-    - branches@psono/psono-fileserver
-    - tags@psono/psono-fileserver
+    - branches@esaqa/psono/psono-fileserver
+    - tags@esaqa/psono/psono-fileserver
 
 run-vulnerability-python-dependencies:
   except:
@@ -154,8 +154,8 @@ run-vulnerability-scan:
     - docker run -e "LANG=C.UTF-8" $CONTAINER_TEST_IMAGE sh -c "pip3 install bandit && bandit -r /root -x /root/psono/restapi/tests,/root/psono/administration/tests"
   allow_failure: true
   only:
-    - branches@psono/psono-fileserver
-    - tags@psono/psono-fileserver
+    - branches@esaqa/psono/psono-fileserver
+    - tags@esaqa/psono/psono-fileserver
 
 
 
@@ -195,7 +195,7 @@ build-sbom:
     paths:
       - ./*
   only:
-    - branches@psono/psono-fileserver
+    - branches@esaqa/psono/psono-fileserver
     - /^v[0-9]*\.[0-9]*\.[0-9]*$/
 
 release-docker-jfrog:
@@ -319,7 +319,7 @@ deploy-nightlyartifacts:
     name: static.psono.com
     url: https://get.psono.com/psono/psono-fileserver/nightly/sbom.json
   only:
-    - develop@psono/psono-fileserver
+    - develop@esaqa/psono/psono-fileserver
 
 
 deploy-releaseartifacts:
