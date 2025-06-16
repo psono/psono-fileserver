@@ -132,7 +132,7 @@ paramiko==3.4.0
     # via
     #   -r requirements.in
     #   django-storages
-protobuf==4.21.9
+protobuf==4.25.8
     # via
     #   google-api-core
     #   googleapis-common-protos
