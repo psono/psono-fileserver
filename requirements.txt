@@ -33,7 +33,7 @@ boto3==1.34.39
     # via
     #   -r requirements.in
     #   django-storages
-botocore==1.34.39
+botocore==1.34.162
     # via
     #   boto3
     #   s3transfer
@@ -194,7 +194,7 @@ typing-extensions==4.12.2
     #   azure-core
     #   pyopenssl
     #   twisted
-urllib3==1.26.19
+urllib3==2.5.0
     # via
     #   botocore
     #   requests
