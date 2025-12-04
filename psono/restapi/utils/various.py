@@ -2,7 +2,7 @@ import os
 import uuid
 import boto3
 from django.conf import settings
-from django.core.files.storage import get_storage_class
+from django.utils.module_loading import import_string
 
 def get_storage(engine):
     """
@@ -31,7 +31,7 @@ def get_storage(engine):
     else:
         engine_kwargs = config
 
-    return get_storage_class(settings.AVAILABLE_FILESYSTEMS[engine['class']])(**engine_kwargs)
+    return import_string(settings.AVAILABLE_FILESYSTEMS[engine['class']])(**engine_kwargs)
 
 def get_os_username():
 
