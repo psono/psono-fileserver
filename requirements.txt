@@ -194,7 +194,7 @@ typing-extensions==4.12.2
     #   azure-core
     #   pyopenssl
     #   twisted
-urllib3==2.6.0
+urllib3==2.6.3
     # via
     #   botocore
     #   requests
