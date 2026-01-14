@@ -20,7 +20,7 @@ autobahn==24.4.2
     # via daphne
 automat==24.8.1
     # via twisted
-azure-core==1.26.1
+azure-core==1.38.0
     # via
     #   azure-storage-blob
     #   django-storages
@@ -180,7 +180,6 @@ service-identity==24.1.0
     # via twisted
 six==1.16.0
     # via
-    #   azure-core
     #   isodate
     #   python-dateutil
 sqlparse==0.5.0
