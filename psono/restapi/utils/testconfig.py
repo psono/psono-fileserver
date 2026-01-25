@@ -224,14 +224,14 @@ def test_config():
         if shard['engine'].get('class', None) == 'local':
             if 'location' not in shard['engine'].get('kwargs', {}):
                 return {
-                    'error': '  - Error: Please add a location property to the engine\s kwargs in your shard config in your settings.yml.'
+                    'error': '  - Error: Please add a location property to the engine\'s kwargs in your shard config in your settings.yml.'
                 }
 
             print('  - Success: Required property location in your engine\'s kwargs present.')
 
             if 'location' not in shard['engine'].get('kwargs', {}):
                 return {
-                    'error': '  - Error: Please add a location property to the engine\s kwargs in your shard config in your settings.yml.'
+                    'error': '  - Error: Please add a location property to the engine\'s kwargs in your shard config in your settings.yml.'
                 }
 
             print('  - Success: Required property location in your engine\'s kwargs present.')
