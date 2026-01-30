@@ -117,8 +117,6 @@ jmespath==1.1.0
     # via
     #   boto3
     #   botocore
-markdown==3.2.1
-    # via -r requirements.in
 more-itertools==8.2.0
     # via -r requirements.in
 msgpack==1.1.2
@@ -133,7 +131,7 @@ paramiko==3.4.0
     #   django-storages
 proto-plus==1.27.0
     # via google-api-core
-protobuf==6.33.4
+protobuf==6.33.5
     # via
     #   google-api-core
     #   googleapis-common-protos
@@ -199,6 +197,3 @@ urllib3==2.6.3
     #   requests
 zope-interface==8.2
     # via twisted
-
-# The following packages are considered to be unsafe in a requirements file:
-# setuptools
