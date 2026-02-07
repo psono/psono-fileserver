@@ -59,7 +59,7 @@ cryptography==46.0.3
     #   service-identity
 daphne==4.1.2
     # via -r requirements.in
-django==5.2.9
+django==5.2.11
     # via
     #   -r requirements.in
     #   django-cors-headers
