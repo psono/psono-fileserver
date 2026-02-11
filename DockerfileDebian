@@ -1,6 +1,5 @@
-# PSONO Dockerfile for Ubuntu 24.04
-FROM psono-docker.jfrog.io/ubuntu:24.04
-ENV DEBIAN_FRONTEND noninteractive
+FROM python:3.14-slim-trixie
+ENV DEBIAN_FRONTEND=noninteractive
 LABEL maintainer="Sascha Pfeiffer <sascha.pfeiffer@psono.com>"
 COPY . /root/
 WORKDIR /root
@@ -17,16 +16,11 @@ RUN mkdir -p /root/.pip && \
         libpq-dev \
         libffi-dev \
         libssl-dev \
-        python3-dev \
-        python3-pip \
-        python3-psycopg2 \
         postgresql-client && \
     pip3 install -r requirements.txt && \
     mkdir -p /root/.psono_fileserver && \
     cp /root/configs/mainconfig/settings.yaml /root/.psono_fileserver/settings.yaml && \
     sed -i s,path/to/psono-fileserver,root,g /root/.psono_fileserver/settings.yaml && \
-    apt-get purge -y \
-        python3-pip && \
     apt-get clean && \
     rm -Rf /root/psono/static && \
     rm -Rf /root/var && \
