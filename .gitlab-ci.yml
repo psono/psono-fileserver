@@ -60,10 +60,10 @@ run-unittests-ubuntu:
   script:
     - docker info
     - sh ./var/update_version.sh
-    - docker build -f DockerfileUbuntu -t ubu-testimage --pull .
+    - docker build -f DockerfileDebian -t testimage --pull .
     - docker run -d -e POSTGRES_HOST_AUTH_METHOD=trust --name db postgres:15.5-alpine
     - sleep 20
-    - docker run --link db:postgres ubu-testimage bash -c "apt-get update && apt-get install -y python3-pip && pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && coverage3 run --source='.' ./psono/manage.py test restapi.tests cron.tests && coverage3 report --omit=psono/restapi/migrations/*,psono/administration/tests*,psono/administration/migrations/*,psono/restapi/tests*"
+    - docker run --link db:postgres testimage bash -c "apt-get update && apt-get install -y python3-pip && pip3 install -r requirements-dev.txt && python3 ./psono/manage.py migrate && coverage3 run --source='.' ./psono/manage.py test restapi.tests cron.tests && coverage3 report --omit=psono/restapi/migrations/*,psono/administration/tests*,psono/administration/migrations/*,psono/restapi/tests*"
 
 
 run-unittests-alpine:
