@@ -9,7 +9,7 @@ pynacl==1.6.2
 django-redis==5.4.0
 ntplib==0.3.4
 python-dateutil==2.8.2
-requests==2.32.4
+requests==2.33.0
 
 google-cloud-storage==2.14.0
 apache-libcloud==3.8.0
