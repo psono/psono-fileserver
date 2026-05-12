@@ -17,4 +17,3 @@ boto3==1.34.39
 paramiko==5.0.0
 
 django-storages[azure,boto3,google,libcloud,sftp]==1.14.5
-twisted[tls]==26.4.0rc2

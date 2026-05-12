@@ -182,10 +182,8 @@ six==1.17.0
     # via python-dateutil
 sqlparse==0.5.5
     # via django
-twisted[tls]==26.4.0rc2
-    # via
-    #   -r requirements.in
-    #   daphne
+twisted[tls]==26.4.0
+    # via daphne
 txaio==25.12.2
     # via autobahn
 typing-extensions==4.15.0
