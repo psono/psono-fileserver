@@ -191,9 +191,9 @@ typing-extensions==4.15.0
     #   azure-core
     #   azure-storage-blob
     #   twisted
-ujson==5.12.0
+ujson==5.12.1
     # via autobahn
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   botocore
     #   requests
