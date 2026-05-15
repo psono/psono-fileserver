@@ -182,10 +182,8 @@ six==1.17.0
     # via python-dateutil
 sqlparse==0.5.5
     # via django
-twisted[tls]==26.4.0rc2
-    # via
-    #   -r requirements.in
-    #   daphne
+twisted[tls]==26.4.0
+    # via daphne
 txaio==25.12.2
     # via autobahn
 typing-extensions==4.15.0
@@ -193,9 +191,9 @@ typing-extensions==4.15.0
     #   azure-core
     #   azure-storage-blob
     #   twisted
-ujson==5.12.0
+ujson==5.12.1
     # via autobahn
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   botocore
     #   requests
