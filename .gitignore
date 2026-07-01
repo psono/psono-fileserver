@@ -1,4 +1,5 @@
 .idea
+.claude
 sqlite.db
 .mypy_cache
 *.py[cod]
