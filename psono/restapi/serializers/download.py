@@ -74,7 +74,7 @@ class DownloadSerializer(serializers.Serializer):
         if not storage.exists(target_path):
 
             APIServer.revoke_download({
-                'file_transfer_id': file_transfer_id,
+                'file_transfer_id': str(file_transfer_id),
                 'ticket': ticket,
                 'ticket_nonce': ticket_nonce,
                 'ip_address': get_ip(self.context['request']),
