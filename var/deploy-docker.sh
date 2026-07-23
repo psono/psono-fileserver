@@ -31,7 +31,17 @@ if [ "${latest_digest}" != "${version_digest}" ]; then
 fi
 
 cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${release_image}@${version_digest}"
-cosign verify --key env://COSIGN_PUBLIC_KEY "${release_image}@${version_digest}"
+
+verification_attempt=1
+until cosign verify --key env://COSIGN_PUBLIC_KEY "${release_image}@${version_digest}"; do
+    if [ "${verification_attempt}" -ge 12 ]; then
+        echo "Signature was not discoverable after ${verification_attempt} verification attempts" >&2
+        exit 1
+    fi
+    echo "Signature is not discoverable yet; retrying in 10 seconds"
+    verification_attempt=$((verification_attempt + 1))
+    sleep 10
+done
 
 # Deploy to GitHub
 echo "Clonging gitlab.com/psono/psono-fileserver.git"
