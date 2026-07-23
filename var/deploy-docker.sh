@@ -30,10 +30,8 @@ if [ "${latest_digest}" != "${version_digest}" ]; then
     exit 1
 fi
 
-cosign sign --yes --tlog-upload=false --key env://COSIGN_PRIVATE_KEY "${release_image}@${version_digest}"
-
-# Transparency-log verification is intentionally disabled together with Rekor uploads.
-cosign verify --insecure-ignore-tlog --key env://COSIGN_PUBLIC_KEY "${release_image}@${version_digest}"
+cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${release_image}@${version_digest}"
+cosign verify --key env://COSIGN_PUBLIC_KEY "${release_image}@${version_digest}"
 
 # Deploy to GitHub
 echo "Clonging gitlab.com/psono/psono-fileserver.git"
