@@ -3,7 +3,7 @@ django==5.2.16
 djangorestframework==3.16.1
 django-cors-headers==3.10.1
 django-filter==2.4.0
-PyYAML==6.0.1
+PyYAML==6.0.3
 more_itertools==8.2.0
 pynacl==1.6.2
 django-redis==5.4.0
