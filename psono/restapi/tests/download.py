@@ -1,10 +1,31 @@
 from mock import Mock, patch
+from django.conf import settings
 from django.test import override_settings
+from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIRequestFactory
 
 from .base import APITestCaseExtended
 from restapi.serializers.download import DownloadSerializer
+
+
+class DownloadViewTest(APITestCaseExtended):
+    def test_request_larger_than_django_default_upload_limit(self):
+        previous_default_upload_limit = 2_621_440
+        self.assertGreater(
+            settings.DATA_UPLOAD_MAX_MEMORY_SIZE, previous_default_upload_limit
+        )
+
+        response = self.client.post(
+            reverse('download'),
+            {'padding': 'a' * previous_default_upload_limit},
+            format='json',
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(
+            set(response.data), {'file_transfer_id', 'ticket', 'ticket_nonce'}
+        )
 
 
 class DownloadSerializerTest(APITestCaseExtended):
