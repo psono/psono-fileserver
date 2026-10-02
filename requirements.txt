@@ -184,7 +184,7 @@ typing-extensions==4.15.0
     #   twisted
 ujson==5.13.0
     # via autobahn
-urllib3==2.7.0
+urllib3==2.8.0
     # via
     #   botocore
     #   requests
