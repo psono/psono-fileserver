@@ -5,6 +5,8 @@ demo
 .coverage
 .htmlcov
 *.deb
+.venv*
+venv
 .docs
 .dockerignore
 .git
@@ -20,5 +22,4 @@ docu
 .gitmodules
 Dockerfile*
 README.md
-
 
